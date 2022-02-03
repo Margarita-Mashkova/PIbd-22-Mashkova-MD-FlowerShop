@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FlowerShopBusinessLogic\FlowerShopBusinessLogic.csproj" />
     <ProjectReference Include="..\FlowerShopListImplement\FlowerShopListImplement.csproj" />
   </ItemGroup>
