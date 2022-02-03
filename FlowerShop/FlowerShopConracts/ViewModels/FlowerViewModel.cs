@@ -11,8 +11,10 @@ namespace FlowerShopConracts.ViewModels
     public class FlowerViewModel
     {
         public int Id { get; set; }
+
         [DisplayName("Название букета")]
-        public string ProductName { get; set; }
+        public string FlowerName { get; set; }
+
         [DisplayName("Цена")]
         public decimal Price { get; set; }
         public Dictionary<int, (string, int)> FlowerComponents { get; set; }

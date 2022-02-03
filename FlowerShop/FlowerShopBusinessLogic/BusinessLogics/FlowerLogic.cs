@@ -56,7 +56,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             });
             if (element == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Удаляемый элемент не найден");
             }
             _flowerStorage.Delete(model);
         }
