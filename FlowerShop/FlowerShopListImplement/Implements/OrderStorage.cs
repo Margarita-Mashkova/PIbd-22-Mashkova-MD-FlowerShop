@@ -35,11 +35,11 @@ namespace FlowerShopListImplement.Implements
             }
             var result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
-            { /////////////////////////!!!!!!!!!!!!!!!!!!!!!!
-                /*if (order.ComponentName.Contains(model.ComponentName))
+            { 
+                if (order.Id.Equals(model.Id))
                 {
                     result.Add(CreateModel(order));
-                }*/
+                }
             }
             return result;
         }
@@ -51,7 +51,7 @@ namespace FlowerShopListImplement.Implements
             }
             foreach (var order in source.Orders)
             {
-                if (order.Id == model.Id) ///удалила второе условие по одинаковому названию
+                if (order.Id == model.Id) 
                 {
                     return CreateModel(order);
                 }

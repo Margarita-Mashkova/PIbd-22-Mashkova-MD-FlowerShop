@@ -1,4 +1,3 @@
-using FlowerShopView;
 using FlowerShopBusinessLogic.BusinessLogics;
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.StoragesContracts;
@@ -8,7 +7,7 @@ using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
 
-namespace FlowerShop
+namespace FlowerShopView
 {
     static class Program
     {
@@ -30,8 +29,6 @@ namespace FlowerShop
         [STAThread]
         static void Main()
         {
-            //ApplicationConfiguration.Initialize();
-            //Application.Run(new FormComponent());
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
