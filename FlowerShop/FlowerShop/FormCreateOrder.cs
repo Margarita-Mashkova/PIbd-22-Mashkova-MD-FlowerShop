@@ -26,6 +26,14 @@ namespace FlowerShopView
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             ///При загрузке формы подгружаем список изделий.
+            List<FlowerViewModel> list = _logicF.Read(null);
+            if (list != null)
+            {
+                comboBoxFlower.DisplayMember = "FlowerName";
+                comboBoxFlower.ValueMember = "Id";
+                comboBoxFlower.DataSource = list;
+                comboBoxFlower.SelectedItem = null;
+            }
         }
         private void CalcSum()
         {

@@ -21,7 +21,6 @@ namespace FlowerShopView
             InitializeComponent();
             _logic = logic;
         }
-
         private void FormFlowers_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -39,10 +38,11 @@ namespace FlowerShopView
                     dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridView.Columns[3].HeaderText = "Компоненты";
                 }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void buttonAdd_Click(object sender, EventArgs e)

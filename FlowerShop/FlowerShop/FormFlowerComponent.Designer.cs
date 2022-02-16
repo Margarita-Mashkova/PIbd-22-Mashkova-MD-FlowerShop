@@ -101,7 +101,7 @@
             this.Controls.Add(this.comboBoxComponent);
             this.Controls.Add(this.labelComponent);
             this.Name = "FormFlowerComponent";
-            this.Text = "FormFlowerComponent";
+            this.Text = "Компоненты букета";
             this.ResumeLayout(false);
             this.PerformLayout();
 

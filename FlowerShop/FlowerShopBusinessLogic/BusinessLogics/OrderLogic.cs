@@ -28,9 +28,17 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             return _orderStorage.GetFilteredList(model);
         }
         //подумать!!!
-        public void CreateOrder(CreateOrderBindingModel model) 
+        public void CreateOrder(CreateOrderBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel 
+            /*var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                FlowerId = model.FlowerId,
+                Count = model.Count,
+                Sum = model.Sum,
+                Status = FlowerShopConracts.Enums.OrderStatus.Принят,
+                DateCreate = DateTime.Now
+            });*/
+            _orderStorage.Insert(new OrderBindingModel
             {
                 FlowerId = model.FlowerId,
                 Count = model.Count,
@@ -38,16 +46,6 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 Status = FlowerShopConracts.Enums.OrderStatus.Принят,
                 DateCreate = DateTime.Now
             });
-            if (order != null) {
-                _orderStorage.Insert(new OrderBindingModel
-                {
-                    FlowerId = model.FlowerId,
-                    Count = model.Count,
-                    Sum = model.Sum,
-                    Status = FlowerShopConracts.Enums.OrderStatus.Принят,
-                    DateCreate = DateTime.Now
-                });
-            }
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
@@ -59,7 +57,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals(OrderStatus.Принят)) //////////
+            if (!order.Status.Equals("Принят")) 
             {
                 throw new Exception($"Невозможно обработать заказ, т.к. он не имеет статуса {OrderStatus.Принят}");
             }
@@ -84,7 +82,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals(OrderStatus.Выполняется)) //////////
+            if (!order.Status.Equals("Выполняется")) 
             {
                 throw new Exception($"Невозможно завершить заказ, т.к. он не имеет статуса {OrderStatus.Выполняется}");
             }
@@ -109,7 +107,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals(OrderStatus.Готов)) //////////
+            if (!order.Status.Equals("Готов"))
             {
                 throw new Exception($"Невозможно выдать заказ, т.к. он не имеет статуса {OrderStatus.Готов}");
             }

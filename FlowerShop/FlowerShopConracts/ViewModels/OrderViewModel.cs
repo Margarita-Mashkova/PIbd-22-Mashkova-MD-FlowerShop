@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using FlowerShopConracts.Enums;
 
 namespace FlowerShopConracts.ViewModels
 {
@@ -23,7 +24,7 @@ namespace FlowerShopConracts.ViewModels
         public decimal Sum { get; set; }
 
         [DisplayName("Статус")]
-        public string Status { get; set; }
+        public string Status { get; set; } 
 
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }

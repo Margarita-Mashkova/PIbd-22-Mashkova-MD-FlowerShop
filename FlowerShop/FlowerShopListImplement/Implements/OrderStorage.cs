@@ -108,14 +108,25 @@ namespace FlowerShopListImplement.Implements
             order.DateImplement = model.DateImplement;
             return order;
         }
-        private static OrderViewModel CreateModel(Order order)
+        private OrderViewModel CreateModel(Order order)
         {
+            string flowerName = null;
+            foreach (Flower flower in source.Flowers)
+            {
+                if (order.FlowerId == flower.Id)
+                {
+                    flowerName = flower.FlowerName;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
+                FlowerId = order.FlowerId,
+                FlowerName = flowerName,
                 Count = order.Count,
                 Sum = order.Sum,
-                //Status = order.Status, ////починить
+                Status = Enum.GetName(order.Status),
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement
             };
