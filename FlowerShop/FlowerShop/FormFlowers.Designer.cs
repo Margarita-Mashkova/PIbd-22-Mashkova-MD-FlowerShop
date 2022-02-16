@@ -104,6 +104,7 @@
             // ColumnFlowerName
             // 
             this.ColumnFlowerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnFlowerName.FillWeight = 60F;
             this.ColumnFlowerName.HeaderText = "Название букета";
             this.ColumnFlowerName.Name = "ColumnFlowerName";
             // 

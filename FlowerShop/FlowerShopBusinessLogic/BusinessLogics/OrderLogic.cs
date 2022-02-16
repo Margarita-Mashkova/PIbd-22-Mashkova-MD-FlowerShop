@@ -27,17 +27,8 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             }
             return _orderStorage.GetFilteredList(model);
         }
-        //подумать!!!
         public void CreateOrder(CreateOrderBindingModel model)
         {
-            /*var order = _orderStorage.GetElement(new OrderBindingModel 
-            {
-                FlowerId = model.FlowerId,
-                Count = model.Count,
-                Sum = model.Sum,
-                Status = FlowerShopConracts.Enums.OrderStatus.Принят,
-                DateCreate = DateTime.Now
-            });*/
             _orderStorage.Insert(new OrderBindingModel
             {
                 FlowerId = model.FlowerId,
