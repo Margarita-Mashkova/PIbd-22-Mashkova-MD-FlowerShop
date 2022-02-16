@@ -16,11 +16,6 @@ namespace FlowerShopView
     public partial class FormFlowers : Form
     {
         private readonly IFlowerLogic _logic;
-
-        private Dictionary<int, (string, int)> flowerComponents;
-        public int Id { set { id = value; } }
-        private int? id;
-
         public FormFlowers(IFlowerLogic logic)
         {
             InitializeComponent();
