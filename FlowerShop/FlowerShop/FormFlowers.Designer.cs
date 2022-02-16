@@ -33,6 +33,10 @@
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFlowerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFlowerComponents = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,6 +44,11 @@
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
+            this.ColumnFlowerName,
+            this.ColumnPrice,
+            this.ColumnFlowerComponents});
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
@@ -86,6 +95,29 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "Id букета";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Visible = false;
+            // 
+            // ColumnFlowerName
+            // 
+            this.ColumnFlowerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnFlowerName.HeaderText = "Название букета";
+            this.ColumnFlowerName.Name = "ColumnFlowerName";
+            // 
+            // ColumnPrice
+            // 
+            this.ColumnPrice.HeaderText = "Цена";
+            this.ColumnPrice.Name = "ColumnPrice";
+            // 
+            // ColumnFlowerComponents
+            // 
+            this.ColumnFlowerComponents.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnFlowerComponents.HeaderText = "Компоненты";
+            this.ColumnFlowerComponents.Name = "ColumnFlowerComponents";
+            // 
             // FormFlowers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -111,5 +143,9 @@
         private Button buttonUpd;
         private Button buttonDel;
         private Button buttonRef;
+        private DataGridViewTextBoxColumn ColumnId;
+        private DataGridViewTextBoxColumn ColumnFlowerName;
+        private DataGridViewTextBoxColumn ColumnPrice;
+        private DataGridViewTextBoxColumn ColumnFlowerComponents;
     }
 }

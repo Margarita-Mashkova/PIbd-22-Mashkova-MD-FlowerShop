@@ -16,6 +16,11 @@ namespace FlowerShopView
     public partial class FormFlowers : Form
     {
         private readonly IFlowerLogic _logic;
+
+        private Dictionary<int, (string, int)> flowerComponents;
+        public int Id { set { id = value; } }
+        private int? id;
+
         public FormFlowers(IFlowerLogic logic)
         {
             InitializeComponent();
@@ -32,17 +37,21 @@ namespace FlowerShopView
                 var list = _logic.Read(null);
                 if (list != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[3].HeaderText = "Компоненты";
+                    dataGridView.Rows.Clear();
+                    foreach (var flower in list)
+                    {
+                        string strComponents = string.Empty;
+                        foreach (var component in flower.FlowerComponents)
+                        {
+                            strComponents += component.Key + ") " + component.Value.Item1 + " = " + component.Value.Item2 + " шт. ";
+                        }
+                        dataGridView.Rows.Add(new object[] { flower.Id, flower.FlowerName, flower.Price, strComponents });
+                    }
                 }
-
             }
             catch (Exception ex)
             {
-               MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void buttonAdd_Click(object sender, EventArgs e)
