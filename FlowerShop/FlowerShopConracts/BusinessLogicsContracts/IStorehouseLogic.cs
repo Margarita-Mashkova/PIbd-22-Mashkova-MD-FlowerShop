@@ -10,6 +10,9 @@ namespace FlowerShopConracts.BusinessLogicsContracts
 {
     public interface IStorehouseLogic
     {
-       
+        List<StorehouseViewModel> Read(StorehouseBindingModel model);
+        void CreateOrUpdate(StorehouseBindingModel model);
+        void Delete(StorehouseBindingModel model);
+        void AddComponent(AddComponentBindingModel model);
     }
 }

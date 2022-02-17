@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowerShopConracts.BindingModels
+namespace FlowerShopListImplement.Models
 {
-    public class StorehouseBindingModel
+    public class Storehouse
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string StorehouseName { get; set; }
         public string ResponsibleFullName { get; set; }
         public DateTime DateCreate { get; set; }
-        public Dictionary<int, (string, int)> StorehouseComponents { get; set; }
+        public Dictionary<int, int> StorehouseComponents { get; set; }
     }
 }

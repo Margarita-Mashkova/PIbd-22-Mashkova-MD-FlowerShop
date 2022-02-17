@@ -9,7 +9,7 @@ namespace FlowerShopConracts.ViewModels
 {
     public class StorehouseViewModel
     {
-        public int StorehouseId { get; set; }
+        public int Id { get; set; }
 
         [DisplayName("Склад")]
         public string StorehouseName { get; set; }
