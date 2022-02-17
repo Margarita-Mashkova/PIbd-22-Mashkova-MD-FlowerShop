@@ -166,7 +166,7 @@ namespace FlowerShopFileImplement
                     }
                     xElement.Add(new XElement("Flower",
                      new XAttribute("Id", flower.Id),
-                     new XElement("ProductName", flower.FlowerName),
+                     new XElement("FlowerName", flower.FlowerName),
                      new XElement("Price", flower.Price),
                      compElement));
                 }
