@@ -38,11 +38,11 @@
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnComponentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -147,23 +147,6 @@
             this.dataGridView.Size = new System.Drawing.Size(581, 334);
             this.dataGridView.TabIndex = 0;
             // 
-            // ColumnId
-            // 
-            this.ColumnId.HeaderText = "Id компонента";
-            this.ColumnId.Name = "ColumnId";
-            this.ColumnId.Visible = false;
-            // 
-            // ColumnComponentName
-            // 
-            this.ColumnComponentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnComponentName.HeaderText = "Компонент";
-            this.ColumnComponentName.Name = "ColumnComponentName";
-            // 
-            // ColumnCount
-            // 
-            this.ColumnCount.HeaderText = "Количество";
-            this.ColumnCount.Name = "ColumnCount";
-            // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(481, 458);
@@ -183,6 +166,23 @@
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "Id компонента";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Visible = false;
+            // 
+            // ColumnComponentName
+            // 
+            this.ColumnComponentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnComponentName.HeaderText = "Компонент";
+            this.ColumnComponentName.Name = "ColumnComponentName";
+            // 
+            // ColumnCount
+            // 
+            this.ColumnCount.HeaderText = "Количество";
+            this.ColumnCount.Name = "ColumnCount";
             // 
             // FormFlower
             // 
@@ -218,10 +218,10 @@
         private Button buttonUpd;
         private Button buttonAdd;
         private DataGridView dataGridView;
+        private Button buttonSave;
+        private Button buttonCancel;
         private DataGridViewTextBoxColumn ColumnId;
         private DataGridViewTextBoxColumn ColumnComponentName;
         private DataGridViewTextBoxColumn ColumnCount;
-        private Button buttonSave;
-        private Button buttonCancel;
     }
 }
