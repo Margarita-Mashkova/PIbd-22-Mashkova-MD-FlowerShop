@@ -32,13 +32,7 @@ namespace FlowerShopFileImplement
                 instance = new FileDataListSingleton();
             }
             return instance;
-        }
-        /*~FileDataListSingleton()
-        {
-            SaveComponents();
-            SaveOrders();
-            SaveFlowers();
-        }*/
+        }        
         public static void SaveData() 
         {
             instance.SaveComponents();
@@ -79,13 +73,15 @@ namespace FlowerShopFileImplement
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
-                        //DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
-                        //DateImplement = Convert.ToDateTime(elem.Element("DateImplement").Value)
                     });
                     if (elem.Element("DateCreate").Value != "")
+                    {
                         list.Last().DateCreate = DateTime.ParseExact(elem.Element("DateCreate").Value, "d.M.yyyy H:m:s", null);
+                    }
                     if (elem.Element("DateImplement").Value != "")
+                    {
                         list.Last().DateImplement = DateTime.ParseExact(elem.Element("DateImplement").Value, "d.M.yyyy H:m:s", null);
+                    }
                 }
             }
             return list;
@@ -143,7 +139,7 @@ namespace FlowerShopFileImplement
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
                     new XElement("Status", order.Status),
-                    new XElement("DateCreate", order.DateCreate.ToString()), //toString??
+                    new XElement("DateCreate", order.DateCreate.ToString()),
                     new XElement("DateImplement", order.DateImplement.ToString())));
                 }
                 var xDocument = new XDocument(xElement);
