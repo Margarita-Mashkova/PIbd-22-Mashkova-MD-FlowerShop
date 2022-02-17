@@ -38,7 +38,7 @@ namespace FlowerShopView
                         string strComponents = string.Empty;
                         foreach (var component in flower.FlowerComponents)
                         {
-                            strComponents += component.Key + ") " + component.Value.Item1 + " = " + component.Value.Item2 + " шт. ";
+                            strComponents += component.Value.Item1 + " = " + component.Value.Item2 + " шт.; ";
                         }
                         dataGridView.Rows.Add(new object[] { flower.Id, flower.FlowerName, flower.Price, strComponents });
                     }
