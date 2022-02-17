@@ -1,7 +1,7 @@
 using FlowerShopBusinessLogic.BusinessLogics;
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.StoragesContracts;
-using FlowerShopListImplement.Implements;
+using FlowerShopFileImplement.Implements;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -33,6 +33,7 @@ namespace FlowerShopView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FlowerShopFileImplement.FileDataListSingleton.SaveData();
         }
         private static IUnityContainer BuildUnityContainer()
         {

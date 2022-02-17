@@ -12,7 +12,6 @@ namespace FlowerShopFileImplement
 {
     public class FileDataListSingleton
     {
-        //TODO: прописать логику SaveOrders, сделать Status в LoadOrders
         private static FileDataListSingleton instance;
         private readonly string ComponentFileName = "Component.xml";
         private readonly string OrderFileName = "Order.xml";
@@ -34,11 +33,17 @@ namespace FlowerShopFileImplement
             }
             return instance;
         }
-        ~FileDataListSingleton()
+        /*~FileDataListSingleton()
         {
             SaveComponents();
             SaveOrders();
             SaveFlowers();
+        }*/
+        public static void SaveData() 
+        {
+            instance.SaveComponents();
+            instance.SaveOrders();
+            instance.SaveFlowers();
         }
         private List<Component> LoadComponents()
         {
@@ -74,13 +79,13 @@ namespace FlowerShopFileImplement
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
-                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
-                        DateImplement = Convert.ToDateTime(elem.Element("DateImplement").Value)
+                        //DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        //DateImplement = Convert.ToDateTime(elem.Element("DateImplement").Value)
                     });
-                    /*if (elem.Element("DateCreate").Value != "")
+                    if (elem.Element("DateCreate").Value != "")
                         list.Last().DateCreate = DateTime.ParseExact(elem.Element("DateCreate").Value, "d.M.yyyy H:m:s", null);
                     if (elem.Element("DateImplement").Value != "")
-                        list.Last().DateImplement = DateTime.ParseExact(elem.Element("DateImplement").Value, "d.M.yyyy H:m:s", null);*/
+                        list.Last().DateImplement = DateTime.ParseExact(elem.Element("DateImplement").Value, "d.M.yyyy H:m:s", null);
                 }
             }
             return list;
