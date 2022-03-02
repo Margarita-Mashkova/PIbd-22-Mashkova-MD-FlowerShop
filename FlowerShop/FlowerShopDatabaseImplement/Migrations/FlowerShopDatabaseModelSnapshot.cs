@@ -47,9 +47,6 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("FlowerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FlowerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -58,9 +55,6 @@ namespace FlowerShopDatabaseImplement.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FlowerId")
-                        .IsUnique();
 
                     b.ToTable("Flowers");
                 });

@@ -48,17 +48,10 @@ namespace FlowerShopDatabaseImplement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FlowerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    FlowerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Flowers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Flowers_Orders_FlowerId",
-                        column: x => x.FlowerId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
