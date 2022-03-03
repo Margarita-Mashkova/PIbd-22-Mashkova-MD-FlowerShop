@@ -23,31 +23,13 @@ namespace FlowerShopDatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FlowerId = table.Column<int>(type: "int", nullable: false),
-                    Count = table.Column<int>(type: "int", nullable: false),
-                    Sum = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateImplement = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Flowers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FlowerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,6 +63,30 @@ namespace FlowerShopDatabaseImplement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FlowerId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    Sum = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateImplement = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Flowers_FlowerId",
+                        column: x => x.FlowerId,
+                        principalTable: "Flowers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_FlowerComponents_ComponentId",
                 table: "FlowerComponents",
@@ -92,10 +98,9 @@ namespace FlowerShopDatabaseImplement.Migrations
                 column: "FlowerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flowers_FlowerId",
-                table: "Flowers",
-                column: "FlowerId",
-                unique: true);
+                name: "IX_Orders_FlowerId",
+                table: "Orders",
+                column: "FlowerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -104,13 +109,13 @@ namespace FlowerShopDatabaseImplement.Migrations
                 name: "FlowerComponents");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "Components");
 
             migrationBuilder.DropTable(
                 name: "Flowers");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
         }
     }
 }

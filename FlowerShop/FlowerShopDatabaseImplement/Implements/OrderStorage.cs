@@ -28,7 +28,7 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             using var context = new FlowerShopDatabase();
             return context.Orders
-            .Where(rec => rec.Id.Equals(model.Id)) //!!!!!!!!!!!
+            .Where(rec => rec.Id.Equals(model.Id))
             .Select(CreateModel)
             .ToList();
         }

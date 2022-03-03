@@ -57,8 +57,14 @@ namespace FlowerShopDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                context.Flowers.Add(CreateModel(model, new Flower(), context));
+                Flower flower = new Flower()
+                {
+                    FlowerName = model.FlowerName,
+                    Price = model.Price
+                };
+                context.Flowers.Add(flower);
                 context.SaveChanges();
+                CreateModel(model, flower, context);
                 transaction.Commit();
             }
             catch

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowerShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(FlowerShopDatabase))]
-    [Migration("20220302185714_InitialCreate")]
+    [Migration("20220303090501_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,9 +49,6 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("FlowerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FlowerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -60,9 +57,6 @@ namespace FlowerShopDatabaseImplement.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FlowerId")
-                        .IsUnique();
 
                     b.ToTable("Flowers");
                 });
@@ -121,18 +115,9 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FlowerId");
+
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Flower", b =>
-                {
-                    b.HasOne("FlowerShopDatabaseImplement.Models.Order", "Order")
-                        .WithOne("Flower")
-                        .HasForeignKey("FlowerShopDatabaseImplement.Models.Flower", "FlowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.FlowerComponent", b =>
@@ -154,6 +139,17 @@ namespace FlowerShopDatabaseImplement.Migrations
                     b.Navigation("Flower");
                 });
 
+            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Order", b =>
+                {
+                    b.HasOne("FlowerShopDatabaseImplement.Models.Flower", "Flower")
+                        .WithMany("Orders")
+                        .HasForeignKey("FlowerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flower");
+                });
+
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("FlowerComponents");
@@ -162,12 +158,8 @@ namespace FlowerShopDatabaseImplement.Migrations
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Flower", b =>
                 {
                     b.Navigation("FlowerComponents");
-                });
 
-            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Order", b =>
-                {
-                    b.Navigation("Flower")
-                        .IsRequired();
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
