@@ -53,6 +53,16 @@ namespace FlowerShopView
             var form = Program.Container.Resolve<FormFlowers>();
             form.ShowDialog();
         }
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormStorehouses>();
+            form.ShowDialog();
+        }
+        private void пополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormStorehouseComponent>();
+            form.ShowDialog();
+        }
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCreateOrder>();

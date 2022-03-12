@@ -20,9 +20,9 @@ namespace FlowerShopListImplement.Implements
         public List<StorehouseViewModel> GetFullList()
         {
             var result = new List<StorehouseViewModel>();
-            foreach (var component in source.Storehouses)
+            foreach (var storehouse in source.Storehouses)
             {
-                result.Add(CreateModel(component));
+                result.Add(CreateModel(storehouse));
             }
             return result;
         }
@@ -61,8 +61,7 @@ namespace FlowerShopListImplement.Implements
         {
             var tempStorehouse = new Storehouse { 
                 Id = 1,
-                ResponsibleFullName = model.ResponsibleFullName, ////////
-                DateCreate = model.DateCreate,
+                StorehouseComponents = new Dictionary<int, int>()
             };
             foreach (var storehouse in source.Storehouses)
             {
@@ -105,6 +104,7 @@ namespace FlowerShopListImplement.Implements
         {
             storehouse.StorehouseName = model.StorehouseName;
             storehouse.ResponsibleFullName = model.ResponsibleFullName;
+            storehouse.DateCreate = model.DateCreate;
             // удаляем убранные
             foreach (var key in storehouse.StorehouseComponents.Keys.ToList())
             {

@@ -14,9 +14,10 @@ namespace FlowerShopBusinessLogic.BusinessLogics
     {
         private readonly IStorehouseStorage _storehouseStorage;
         private readonly IComponentStorage _componentStorage;
-        public StorehouseLogic(IStorehouseStorage storehouseStorage)
+        public StorehouseLogic(IStorehouseStorage storehouseStorage, IComponentStorage componentStorage)
         {
             _storehouseStorage = storehouseStorage;
+            _componentStorage = componentStorage;
         }
         public List<StorehouseViewModel> Read(StorehouseBindingModel model)
         {
@@ -63,7 +64,6 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             }
             _storehouseStorage.Delete(model);
         }
-        //TODO: Доделать метод
         public void AddComponent(AddComponentBindingModel model)
         {
             var storehouse = _storehouseStorage.GetElement(new StorehouseBindingModel
@@ -82,13 +82,13 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Компонент не найден");
             }
-            if (storehouse.StorehouseComponents.ContainsKey(model.ComponentId))
+            if (storehouse.StorehouseComponents.ContainsKey(component.Id))
             {
-                storehouse.StorehouseComponents[model.ComponentId] = (component.ComponentName, storehouse.StorehouseComponents[model.ComponentId].Item2 + model.Count);
+                storehouse.StorehouseComponents[component.Id] = (component.ComponentName, storehouse.StorehouseComponents[model.ComponentId].Item2 + model.Count);
             }
             else
             {
-                storehouse.StorehouseComponents.Add(model.ComponentId, (component.ComponentName, model.Count));
+                storehouse.StorehouseComponents.Add(component.Id, (component.ComponentName, model.Count));
             }
             _storehouseStorage.Update(new StorehouseBindingModel
             {
