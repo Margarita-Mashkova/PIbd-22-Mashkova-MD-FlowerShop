@@ -38,19 +38,19 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             var components = _componentStorage.GetFullList();
             var flowers = _flowerStorage.GetFullList();
             var list = new List<ReportFlowerComponentViewModel>();
-            foreach (var component in components)
+            foreach (var flower in flowers)
             {
                 var record = new ReportFlowerComponentViewModel
                 {
-                    ComponentName = component.ComponentName,
-                    Flowers = new List<Tuple<string, int>>(),
+                    FlowerName = flower.FlowerName,
+                    Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var flower in flowers)
+                foreach (var component in components)
                 {
                     if (flower.FlowerComponents.ContainsKey(component.Id))
                     {
-                        record.Flowers.Add(new Tuple<string, int>(flower.FlowerName, flower.FlowerComponents[component.Id].Item2));
+                        record.Components.Add(new Tuple<string, int>(component.ComponentName, flower.FlowerComponents[component.Id].Item2));
                         record.TotalCount += flower.FlowerComponents[component.Id].Item2;
                     }
                 }
@@ -84,19 +84,19 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             _saveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
-                Components = _componentStorage.GetFullList()
+                Title = "Список букетов",
+                Flowers = _flowerStorage.GetFullList()
             });
         }
 
-        // Сохранение компонент с указаеним продуктов в файл-Excel
+        // Сохранение компонент с указанием продуктов в файл-Excel
         public void SaveFlowerComponentToExcelFile(ReportBindingModel model)
         {
             _saveToExcel.CreateReport(new ExcelInfo
             {
                 FileName = model.FileName,
                 Title = "Список компонент",
-                FlowerComponents = GetFlowerComponent()
+                FlowerComponent = GetFlowerComponent()
             });
         }
 

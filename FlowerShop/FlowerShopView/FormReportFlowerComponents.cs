@@ -31,8 +31,8 @@ namespace FlowerShopView
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.ComponentName, "", ""});
-                        foreach (var listElem in elem.Flowers)
+                        dataGridView.Rows.Add(new object[] { elem.FlowerName, "", ""});
+                        foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
                         }

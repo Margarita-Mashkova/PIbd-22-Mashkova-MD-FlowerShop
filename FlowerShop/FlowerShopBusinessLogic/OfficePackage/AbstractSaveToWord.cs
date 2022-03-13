@@ -26,12 +26,13 @@ namespace FlowerShopBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            foreach (var component in info.Components)
-            {
+            foreach (var flower in info.Flowers)
+            {                
                 CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextProperties)> {(component.ComponentName, new WordTextProperties { 
-                        Size = "24", 
+                    Texts = new List<(string, WordTextProperties)> {(flower.FlowerName, new WordTextProperties {
+                        Size = "24",
+                        Bold = true,
                     }) 
                     },
                     TextProperties = new WordTextProperties
@@ -39,6 +40,21 @@ namespace FlowerShopBusinessLogic.OfficePackage
                         Size = "24",
                         JustificationType = WordJustificationType.Both
                     }
+
+                });
+                string price = ": " + Convert.ToInt32(flower.Price).ToString();
+                CreateParagraph(new WordParagraph
+                {                    
+                    Texts = new List<(string, WordTextProperties)> {(price, new WordTextProperties {
+                        Size = "24",
+                    })
+                    },
+                    TextProperties = new WordTextProperties
+                    {
+                        Size = "24",
+                        JustificationType = WordJustificationType.Both
+                    }
+
                 });
             }
             SaveWord(info);

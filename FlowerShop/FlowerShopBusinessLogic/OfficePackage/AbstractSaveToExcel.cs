@@ -27,30 +27,30 @@ namespace FlowerShopBusinessLogic.OfficePackage
                 CellToName = "C1"
             });
             uint rowIndex = 2;
-            foreach (var fc in info.FlowerComponents)
+            foreach (var flower in info.FlowerComponent)
             {
                 InsertCellInWorksheet(new ExcelCellParameters
                 {
                     ColumnName = "A",
                     RowIndex = rowIndex,
-                    Text = fc.ComponentName,
+                    Text = flower.FlowerName,
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
-                foreach (var flower in fc.Flowers)
+                foreach (var component in flower.Components)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "B",
                         RowIndex = rowIndex,
-                        Text = flower.Item1,
+                        Text = component.Item1,
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = flower.Item2.ToString(),
+                        Text = component.Item2.ToString(),
                         StyleInfo = ExcelStyleInfoType.TextWithBroder
                     });
                     rowIndex++;
@@ -59,7 +59,7 @@ namespace FlowerShopBusinessLogic.OfficePackage
                 {
                     ColumnName = "C",
                     RowIndex = rowIndex,
-                    Text = fc.TotalCount.ToString(),
+                    Text = flower.TotalCount.ToString(),
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
