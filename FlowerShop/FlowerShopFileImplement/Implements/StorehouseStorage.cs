@@ -19,12 +19,7 @@ namespace FlowerShopFileImplement.Implements
         }
         public List<StorehouseViewModel> GetFullList()
         {
-            var result = new List<StorehouseViewModel>();
-            foreach (var storehouse in source.Storehouses)
-            {
-                result.Add(CreateModel(storehouse));
-            }
-            return result;
+            return source.Storehouses.Select(CreateModel).ToList();
         }
         public List<StorehouseViewModel> GetFilteredList(StorehouseBindingModel model)
         {
@@ -32,15 +27,7 @@ namespace FlowerShopFileImplement.Implements
             {
                 return null;
             }
-            var result = new List<StorehouseViewModel>();
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.StorehouseName.Contains(model.StorehouseName))
-                {
-                    result.Add(CreateModel(storehouse));
-                }
-            }
-            return result;
+            return source.Storehouses.Where(rec => rec.StorehouseName.Contains(model.StorehouseName)).Select(CreateModel).ToList();
         }
         public StorehouseViewModel GetElement(StorehouseBindingModel model)
         {
@@ -48,57 +35,39 @@ namespace FlowerShopFileImplement.Implements
             {
                 return null;
             }
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.Id == model.Id || storehouse.StorehouseName == model.StorehouseName)
-                {
-                    return CreateModel(storehouse);
-                }
-            }
-            return null;
+            var storehouse = source.Storehouses.FirstOrDefault(rec => rec.StorehouseName == model.StorehouseName || rec.Id == model.Id);
+            return storehouse != null ? CreateModel(storehouse) : null;
         }
         public void Insert(StorehouseBindingModel model)
         {
-            var tempStorehouse = new Storehouse { 
-                Id = 1,
+            int maxId = source.Storehouses.Count > 0 ? source.Storehouses.Max(rec => rec.Id) : 0;
+            var element = new Storehouse
+            {
+                Id = maxId + 1,
                 StorehouseComponents = new Dictionary<int, int>()
             };
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.Id >= tempStorehouse.Id)
-                {
-                    tempStorehouse.Id = storehouse.Id + 1;
-                }
-            }
-            source.Storehouses.Add(CreateModel(model, tempStorehouse));
+            source.Storehouses.Add(CreateModel(model, element));
         }
         public void Update(StorehouseBindingModel model)
         {
-            Storehouse tempStorehouse = null;
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.Id == model.Id)
-                {
-                    tempStorehouse = storehouse;
-                }
-            }
-            if (tempStorehouse == null)
+            var element = source.Storehouses.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            CreateModel(model, tempStorehouse);
+            CreateModel(model, element);
         }
         public void Delete(StorehouseBindingModel model)
         {
-            for (int i = 0; i < source.Storehouses.Count; ++i)
+            Storehouse element = source.Storehouses.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element != null)
             {
-                if (source.Storehouses[i].Id == model.Id)
-                {
-                    source.Storehouses.RemoveAt(i);
-                    return;
-                }
+                source.Storehouses.Remove(element);
             }
-            throw new Exception("Элемент не найден");
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
         }
         private Storehouse CreateModel(StorehouseBindingModel model, Storehouse storehouse)
         {
@@ -129,28 +98,14 @@ namespace FlowerShopFileImplement.Implements
         }
         private StorehouseViewModel CreateModel(Storehouse storehouse)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
-            var storehouseComponents = new Dictionary<int, (string, int)>();
-            foreach (var sc in storehouse.StorehouseComponents)
-            {
-                string componentName = string.Empty;
-                foreach (var component in source.Components)
-                {
-                    if (sc.Key == component.Id)
-                    {
-                        componentName = component.ComponentName;
-                        break;
-                    }
-                }
-                storehouseComponents.Add(sc.Key, (componentName, sc.Value));
-            }
             return new StorehouseViewModel
             {
                 Id = storehouse.Id,
                 StorehouseName = storehouse.StorehouseName,
                 ResponsibleFullName = storehouse.ResponsibleFullName,
                 DateCreate = storehouse.DateCreate,
-                StorehouseComponents = storehouseComponents
+                StorehouseComponents = storehouse.StorehouseComponents.ToDictionary(recSC => recSC.Key, recSC =>
+                (source.Components.FirstOrDefault(recC => recC.Id == recSC.Key)?.ComponentName, recSC.Value))
             };
         }
     }
