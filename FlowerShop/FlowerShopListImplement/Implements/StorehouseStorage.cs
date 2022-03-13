@@ -153,5 +153,9 @@ namespace FlowerShopListImplement.Implements
                 StorehouseComponents = storehouseComponents
             };
         }
+        public bool CheckAvailability(int count, Dictionary<int, (string, int)> flowerComponents)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

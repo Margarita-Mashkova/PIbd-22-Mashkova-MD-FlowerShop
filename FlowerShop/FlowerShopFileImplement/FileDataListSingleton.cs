@@ -221,6 +221,7 @@ namespace FlowerShopFileImplement
                      new XAttribute("Id", storehouse.Id),
                      new XElement("StorehouseName", storehouse.StorehouseName),
                      new XElement("ResponsibleFullName", storehouse.ResponsibleFullName),
+                     new XElement("DateCreate", storehouse.DateCreate.ToString()),
                      compElement));
                 }
                 var xDocument = new XDocument(xElement);
