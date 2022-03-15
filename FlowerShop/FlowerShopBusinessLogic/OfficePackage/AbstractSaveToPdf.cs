@@ -20,7 +20,7 @@ namespace FlowerShopBusinessLogic.OfficePackage
             });
             CreateParagraph(new PdfParagraph
             {
-                Text = $"с{ info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }", Style = "Normal"
+                Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }", Style = "Normal"
             });
             CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
             CreateRow(new PdfRowParameters
@@ -28,7 +28,7 @@ namespace FlowerShopBusinessLogic.OfficePackage
                 Texts = new List<string> { "Дата заказа", "Букет", "Количество", "Сумма", "Статус" },
                 Style = "NormalTitle",
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
-            });
+            });           
             foreach (var order in info.Orders)
             {
                 CreateRow(new PdfRowParameters
@@ -38,6 +38,12 @@ namespace FlowerShopBusinessLogic.OfficePackage
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });
             }
+            decimal sum = info.Orders.Sum(rec => rec.Sum);
+            CreateParagraph(new PdfParagraph
+            {
+                Text = $"Итого: {sum}",
+                Style = "NormalTitle",
+            });
             SavePdf(info);
         }
 

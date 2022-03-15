@@ -31,7 +31,7 @@ namespace FlowerShopBusinessLogic.OfficePackage.Implements
         {
             var style = document.Styles["Normal"];
             style.Font.Name = "Times New Roman";
-            style.Font.Size = 14;
+            style.Font.Size = 13;
             style = document.Styles.AddStyle("NormalTitle", "Normal");
             style.Font.Bold = true;
         }
@@ -47,6 +47,7 @@ namespace FlowerShopBusinessLogic.OfficePackage.Implements
             paragraph.Format.SpaceAfter = "1cm";
             paragraph.Format.Alignment = ParagraphAlignment.Center;
             paragraph.Style = pdfParagraph.Style;
+            paragraph.Format.SpaceBefore = "0.5cm";
         }
         protected override void CreateTable(List<string> columns)
         {

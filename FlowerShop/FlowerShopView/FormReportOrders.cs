@@ -56,7 +56,6 @@ namespace FlowerShopView
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         private void buttonToPdf_Click(object sender, EventArgs e)
         {
