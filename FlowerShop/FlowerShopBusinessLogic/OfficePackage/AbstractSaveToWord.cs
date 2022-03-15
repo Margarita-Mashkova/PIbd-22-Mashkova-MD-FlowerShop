@@ -15,10 +15,10 @@ namespace FlowerShopBusinessLogic.OfficePackage
             CreateWord(info);
             CreateParagraph(new WordParagraph
             {
-                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { 
-                    Bold = true, 
-                    Size = "24", 
-                }) 
+                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties {
+                    Bold = true,
+                    Size = "24",
+                })
                 },
                 TextProperties = new WordTextProperties
                 {
@@ -27,34 +27,23 @@ namespace FlowerShopBusinessLogic.OfficePackage
                 }
             });
             foreach (var flower in info.Flowers)
-            {                
+            {
                 CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextProperties)> {(flower.FlowerName, new WordTextProperties {
+                    Texts = new List<(string, WordTextProperties)> {
+                        (flower.FlowerName + ": ", new WordTextProperties {
                         Size = "24",
-                        Bold = true,
-                    }) 
+                        Bold = true
+                        }),
+                        (Convert.ToInt32(flower.Price).ToString(), new WordTextProperties {
+                        Size = "24"
+                        })
                     },
                     TextProperties = new WordTextProperties
                     {
                         Size = "24",
                         JustificationType = WordJustificationType.Both
                     }
-
-                });
-                string price = ": " + Convert.ToInt32(flower.Price).ToString();
-                CreateParagraph(new WordParagraph
-                {                    
-                    Texts = new List<(string, WordTextProperties)> {(price, new WordTextProperties {
-                        Size = "24",
-                    })
-                    },
-                    TextProperties = new WordTextProperties
-                    {
-                        Size = "24",
-                        JustificationType = WordJustificationType.Both
-                    }
-
                 });
             }
             SaveWord(info);

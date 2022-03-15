@@ -66,8 +66,7 @@ namespace FlowerShopBusinessLogic.OfficePackage.Implements
         }
         protected override void CreateWord(WordInfo info)
         {
-            _wordDocument = WordprocessingDocument.Create(info.FileName,
-            WordprocessingDocumentType.Document);
+            _wordDocument = WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document);
             MainDocumentPart mainPart = _wordDocument.AddMainDocumentPart();
             mainPart.Document = new Document();
             _docBody = mainPart.Document.AppendChild(new Body());
@@ -98,7 +97,7 @@ namespace FlowerShopBusinessLogic.OfficePackage.Implements
                 }
                 _docBody.AppendChild(docParagraph);
             }
-        }
+        }        
         protected override void SaveWord(WordInfo info)
         {
             _docBody.AppendChild(CreateSectionProperties());
