@@ -11,7 +11,6 @@ using FlowerShopConracts.BindingModels;
 using FlowerShopConracts.BusinessLogicsContracts;
 using Microsoft.Reporting.WinForms;
 
-
 namespace FlowerShopView
 {
     public partial class FormReportOrders : Form
