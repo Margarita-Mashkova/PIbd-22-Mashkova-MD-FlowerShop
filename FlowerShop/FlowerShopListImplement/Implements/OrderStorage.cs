@@ -43,8 +43,6 @@ namespace FlowerShopListImplement.Implements
             }
             return result;
         }
-        //rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
-        //order.Id.Equals(model.Id)
         public OrderViewModel GetElement(OrderBindingModel model)
         {
             if (model == null)
