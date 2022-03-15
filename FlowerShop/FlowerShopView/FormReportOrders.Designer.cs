@@ -30,11 +30,11 @@
         {
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.panel = new System.Windows.Forms.Panel();
-            this.labelFrom = new System.Windows.Forms.Label();
-            this.labelTo = new System.Windows.Forms.Label();
-            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
-            this.buttonMake = new System.Windows.Forms.Button();
             this.buttonToPdf = new System.Windows.Forms.Button();
+            this.buttonMake = new System.Windows.Forms.Button();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.labelTo = new System.Windows.Forms.Label();
+            this.labelFrom = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,35 +53,21 @@
             this.panel.Controls.Add(this.labelTo);
             this.panel.Controls.Add(this.labelFrom);
             this.panel.Controls.Add(this.dateTimePickerFrom);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(952, 47);
             this.panel.TabIndex = 1;
             // 
-            // labelFrom
+            // buttonToPdf
             // 
-            this.labelFrom.AutoSize = true;
-            this.labelFrom.Location = new System.Drawing.Point(12, 15);
-            this.labelFrom.Name = "labelFrom";
-            this.labelFrom.Size = new System.Drawing.Size(15, 15);
-            this.labelFrom.TabIndex = 2;
-            this.labelFrom.Text = "С";
-            // 
-            // labelTo
-            // 
-            this.labelTo.AutoSize = true;
-            this.labelTo.Location = new System.Drawing.Point(239, 15);
-            this.labelTo.Name = "labelTo";
-            this.labelTo.Size = new System.Drawing.Size(21, 15);
-            this.labelTo.TabIndex = 2;
-            this.labelTo.Text = "по";
-            // 
-            // dateTimePickerTo
-            // 
-            this.dateTimePickerTo.Location = new System.Drawing.Point(266, 9);
-            this.dateTimePickerTo.Name = "dateTimePickerTo";
-            this.dateTimePickerTo.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePickerTo.TabIndex = 2;
+            this.buttonToPdf.Location = new System.Drawing.Point(783, 9);
+            this.buttonToPdf.Name = "buttonToPdf";
+            this.buttonToPdf.Size = new System.Drawing.Size(119, 29);
+            this.buttonToPdf.TabIndex = 2;
+            this.buttonToPdf.Text = "В Pdf";
+            this.buttonToPdf.UseVisualStyleBackColor = true;
+            this.buttonToPdf.Click += new System.EventHandler(this.buttonToPdf_Click);
             // 
             // buttonMake
             // 
@@ -93,15 +79,30 @@
             this.buttonMake.UseVisualStyleBackColor = true;
             this.buttonMake.Click += new System.EventHandler(this.buttonMake_Click);
             // 
-            // buttonToPdf
+            // dateTimePickerTo
             // 
-            this.buttonToPdf.Location = new System.Drawing.Point(783, 9);
-            this.buttonToPdf.Name = "buttonToPdf";
-            this.buttonToPdf.Size = new System.Drawing.Size(119, 29);
-            this.buttonToPdf.TabIndex = 2;
-            this.buttonToPdf.Text = "В Pdf";
-            this.buttonToPdf.UseVisualStyleBackColor = true;
-            this.buttonToPdf.Click += new System.EventHandler(this.buttonToPdf_Click);
+            this.dateTimePickerTo.Location = new System.Drawing.Point(266, 9);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePickerTo.TabIndex = 2;
+            // 
+            // labelTo
+            // 
+            this.labelTo.AutoSize = true;
+            this.labelTo.Location = new System.Drawing.Point(239, 15);
+            this.labelTo.Name = "labelTo";
+            this.labelTo.Size = new System.Drawing.Size(21, 15);
+            this.labelTo.TabIndex = 2;
+            this.labelTo.Text = "по";
+            // 
+            // labelFrom
+            // 
+            this.labelFrom.AutoSize = true;
+            this.labelFrom.Location = new System.Drawing.Point(12, 15);
+            this.labelFrom.Name = "labelFrom";
+            this.labelFrom.Size = new System.Drawing.Size(15, 15);
+            this.labelFrom.TabIndex = 2;
+            this.labelFrom.Text = "С";
             // 
             // FormReportOrders
             // 

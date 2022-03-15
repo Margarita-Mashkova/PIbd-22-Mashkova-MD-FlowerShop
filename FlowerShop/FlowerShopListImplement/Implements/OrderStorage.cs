@@ -36,13 +36,15 @@ namespace FlowerShopListImplement.Implements
             var result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             { 
-                if (order.Id.Equals(model.Id))
+                if (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
                 {
                     result.Add(CreateModel(order));
                 }
             }
             return result;
         }
+        //rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
+        //order.Id.Equals(model.Id)
         public OrderViewModel GetElement(OrderBindingModel model)
         {
             if (model == null)

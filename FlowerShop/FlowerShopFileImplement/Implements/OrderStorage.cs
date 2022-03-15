@@ -27,7 +27,10 @@ namespace FlowerShopFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders.Where(rec => rec.Id == model.Id).Select(CreateModel).ToList();
+            return source.Orders
+                .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                .Select(CreateModel)
+                .ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
         {
