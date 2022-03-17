@@ -28,7 +28,7 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             using var context = new FlowerShopDatabase();
             return context.Orders
-            .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
             .Select(CreateModel)
             .ToList();
         }
@@ -90,7 +90,8 @@ namespace FlowerShopDatabaseImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
-                FlowerId = order.FlowerId, 
+                FlowerId = order.FlowerId,
+                ///////////
                 FlowerName = context.Flowers.FirstOrDefault(flowerName => flowerName.Id == order.FlowerId)?.FlowerName,
                 Count = order.Count,
                 Sum = order.Sum,
