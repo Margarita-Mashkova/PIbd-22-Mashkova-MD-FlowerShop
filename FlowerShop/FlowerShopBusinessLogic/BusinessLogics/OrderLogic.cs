@@ -11,9 +11,13 @@ namespace FlowerShopBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly IStorehouseStorage _storehouseStorage;
+        private readonly IFlowerStorage _flowerStorage;
+        public OrderLogic(IOrderStorage orderStorage, IStorehouseStorage storehouseStorage, IFlowerStorage flowerStorage)
         {
             _orderStorage = orderStorage;
+            _storehouseStorage = storehouseStorage;
+            _flowerStorage = flowerStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
@@ -44,23 +48,28 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = model.OrderId
             });
-            if (order == null) 
+            if (order == null)
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals("Принят")) 
+            if (!order.Status.Equals("Принят"))
             {
                 throw new Exception($"Невозможно обработать заказ, т.к. он не имеет статуса {OrderStatus.Принят}");
             }
-            _orderStorage.Update(new OrderBindingModel 
-            { 
+            var flower = _flowerStorage.GetElement(new FlowerBindingModel { Id = order.FlowerId});
+            if (!_storehouseStorage.CheckAvailability(order.Count, flower.FlowerComponents))
+            {
+                throw new Exception("На складах недостаточно компонентов");
+            }
+            _orderStorage.Update(new OrderBindingModel
+            {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется                
+                Status = OrderStatus.Выполняется
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)

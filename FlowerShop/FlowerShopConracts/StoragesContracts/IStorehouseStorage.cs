@@ -16,5 +16,6 @@ namespace FlowerShopConracts.StoragesContracts
         void Insert(StorehouseBindingModel model);
         void Update(StorehouseBindingModel model);
         void Delete(StorehouseBindingModel model);
+        bool CheckAvailability(int count, Dictionary<int, (string, int)> flowerComponents);
     }
 }
