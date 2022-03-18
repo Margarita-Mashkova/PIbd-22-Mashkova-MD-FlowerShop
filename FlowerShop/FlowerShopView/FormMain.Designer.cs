@@ -75,7 +75,7 @@
             // букетыToolStripMenuItem
             // 
             this.букетыToolStripMenuItem.Name = "букетыToolStripMenuItem";
-            this.букетыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.букетыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);           
             this.букетыToolStripMenuItem.Text = "Букеты";
             this.букетыToolStripMenuItem.Click += new System.EventHandler(this.букетыToolStripMenuItem_Click);
             // 
@@ -86,6 +86,15 @@
             this.складыToolStripMenuItem.Text = "Склады";
             this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
             // 
+            // 
+            // пополнениеСкладаToolStripMenuItem
+            // 
+            this.пополнениеСкладаToolStripMenuItem.Name = "пополнениеСкладаToolStripMenuItem";
+            this.пополнениеСкладаToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+            this.пополнениеСкладаToolStripMenuItem.Text = "Пополнение склада";
+            this.пополнениеСкладаToolStripMenuItem.Click += new System.EventHandler(this.пополнениеСкладаToolStripMenuItem_Click);
+            // 
+
             // dataGridView
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
