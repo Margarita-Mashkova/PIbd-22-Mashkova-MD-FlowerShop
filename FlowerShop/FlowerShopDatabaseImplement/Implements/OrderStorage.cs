@@ -17,6 +17,8 @@ namespace FlowerShopDatabaseImplement.Implements
         {
             using var context = new FlowerShopDatabase();
             return context.Orders
+                .Include(rec => rec.Flower)
+                .ToList()
                 .Select(CreateModel)
                 .ToList();
         }
@@ -28,7 +30,9 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             using var context = new FlowerShopDatabase();
             return context.Orders
+            .Include(rec => rec.Flower)
             .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .ToList()
             .Select(CreateModel)
             .ToList();
         }
@@ -40,25 +44,46 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             using var context = new FlowerShopDatabase();
             var order = context.Orders
+            .Include(rec => rec.Flower)
             .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
         public void Insert(OrderBindingModel model)
         {
             using var context = new FlowerShopDatabase();
-            context.Orders.Add(CreateModel(model, new Order()));
-            context.SaveChanges();
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                context.Orders.Add(CreateModel(model, new Order()));
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch 
+            {
+                transaction.Rollback();
+                throw;
+            }            
         }
         public void Update(OrderBindingModel model)
         {
             using var context = new FlowerShopDatabase();
-            var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            using var transaction = context.Database.BeginTransaction();
+            try
             {
-                throw new Exception("Элемент не найден");
+                var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                CreateModel(model, element);
+                context.SaveChanges();
+                transaction.Commit();
             }
-            CreateModel(model, element);
-            context.SaveChanges();
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
         public void Delete(OrderBindingModel model)
         {
@@ -86,13 +111,11 @@ namespace FlowerShopDatabaseImplement.Implements
         }
         private static OrderViewModel CreateModel(Order order)
         {
-            using var context = new FlowerShopDatabase();
             return new OrderViewModel
             {
                 Id = order.Id,
-                FlowerId = order.FlowerId,
-                ///////////
-                FlowerName = context.Flowers.FirstOrDefault(flowerName => flowerName.Id == order.FlowerId)?.FlowerName,
+                FlowerId = order.FlowerId,               
+                FlowerName = order.Flower.FlowerName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),
