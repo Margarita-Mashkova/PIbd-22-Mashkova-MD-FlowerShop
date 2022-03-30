@@ -35,7 +35,6 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         // Получение списка компонент с указанием, в каких изделиях используются
         public List<ReportFlowerComponentViewModel> GetFlowerComponent()
         {
-            var components = _componentStorage.GetFullList();
             var flowers = _flowerStorage.GetFullList();
             var list = new List<ReportFlowerComponentViewModel>();
             foreach (var flower in flowers)
@@ -46,13 +45,10 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                     Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var component in components)
+                foreach (var component in flower.FlowerComponents)
                 {
-                    if (flower.FlowerComponents.ContainsKey(component.Id))
-                    {
-                        record.Components.Add(new Tuple<string, int>(component.ComponentName, flower.FlowerComponents[component.Id].Item2));
-                        record.TotalCount += flower.FlowerComponents[component.Id].Item2;
-                    }
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
                 }
                 list.Add(record);
             }
