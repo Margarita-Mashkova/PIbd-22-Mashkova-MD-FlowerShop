@@ -2,8 +2,6 @@
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace FlowerShopRestApi.Controllers
 {
@@ -30,6 +28,5 @@ namespace FlowerShopRestApi.Controllers
 
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) => _order.CreateOrder(model);
-
     }
 }
