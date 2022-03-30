@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowerShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(FlowerShopDatabase))]
-    [Migration("20220303090501_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220330214734_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,6 +120,56 @@ namespace FlowerShopDatabaseImplement.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Storehouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsibleFullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StorehouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Storehouses");
+                });
+
+            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.StorehouseComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StorehouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("StorehouseId");
+
+                    b.ToTable("StorehouseComponents");
+                });
+
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.FlowerComponent", b =>
                 {
                     b.HasOne("FlowerShopDatabaseImplement.Models.Component", "Component")
@@ -150,9 +200,30 @@ namespace FlowerShopDatabaseImplement.Migrations
                     b.Navigation("Flower");
                 });
 
+            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.StorehouseComponent", b =>
+                {
+                    b.HasOne("FlowerShopDatabaseImplement.Models.Component", "Component")
+                        .WithMany("StorehouseComponents")
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FlowerShopDatabaseImplement.Models.Storehouse", "Storehouse")
+                        .WithMany("StorehouseComponents")
+                        .HasForeignKey("StorehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Component");
+
+                    b.Navigation("Storehouse");
+                });
+
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("FlowerComponents");
+
+                    b.Navigation("StorehouseComponents");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Flower", b =>
@@ -160,6 +231,11 @@ namespace FlowerShopDatabaseImplement.Migrations
                     b.Navigation("FlowerComponents");
 
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Storehouse", b =>
+                {
+                    b.Navigation("StorehouseComponents");
                 });
 #pragma warning restore 612, 618
         }
