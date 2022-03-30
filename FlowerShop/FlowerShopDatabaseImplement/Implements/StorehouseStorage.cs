@@ -139,40 +139,7 @@ namespace FlowerShopDatabaseImplement.Implements
                 transaction.Rollback();
                 throw;
             }
-            return true;
-            /*
-            //проверяем на наличие необходимого количества компонентов
-            foreach (var fc in flowerComponents)
-            {
-                //суммарное количество необходимого компонента для букета в заказе на всех складах
-                int scCount = source.Storehouses
-                    .Where(rec => rec.StorehouseComponents.ContainsKey(fc.Key))
-                    .Sum(rec => rec.StorehouseComponents[fc.Key]);
-                if (scCount < fc.Value.Item2 * count)
-                {
-                    return false;
-                }
-            }
-            //забираем компоненты со складов
-            foreach (var fc in flowerComponents)
-            {
-                int requiredCount = fc.Value.Item2 * count;
-                while (requiredCount > 0)
-                {
-                    var storehouse = source.Storehouses
-                        .FirstOrDefault(rec => rec.StorehouseComponents.ContainsKey(fc.Key) && rec.StorehouseComponents[fc.Key] > 0);
-                    int availableCount = storehouse.StorehouseComponents[fc.Key];
-                    requiredCount -= availableCount;
-                    if (availableCount > requiredCount + availableCount)
-                    {
-                        storehouse.StorehouseComponents[fc.Key] = availableCount - (requiredCount + availableCount);
-                    }
-                    else
-                    {
-                        storehouse.StorehouseComponents[fc.Key] = 0;
-                    }
-                }
-            }*/
+            return true;            
         }
         private Storehouse CreateModel(StorehouseBindingModel model, Storehouse storehouse, FlowerShopDatabase context)
         {
