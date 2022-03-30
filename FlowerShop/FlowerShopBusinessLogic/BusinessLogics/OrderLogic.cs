@@ -32,6 +32,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 FlowerId = model.FlowerId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = FlowerShopConracts.Enums.OrderStatus.Принят,

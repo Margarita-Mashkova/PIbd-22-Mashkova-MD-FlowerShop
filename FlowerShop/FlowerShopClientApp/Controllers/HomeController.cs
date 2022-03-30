@@ -75,8 +75,7 @@ namespace FlowerShopClientApp.Controllers
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
             {
-                Program.Client =
-                APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
+                Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
                 if (Program.Client == null)
                 {
                     throw new Exception("Неверный логин/пароль");

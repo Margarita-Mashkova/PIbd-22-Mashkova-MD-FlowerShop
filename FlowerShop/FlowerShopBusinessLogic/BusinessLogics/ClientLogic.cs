@@ -13,6 +13,10 @@ namespace FlowerShopBusinessLogic.BusinessLogics
     public class ClientLogic : IClientLogic
     {
         private readonly IClientStorage _clientStorage;
+        public ClientLogic(IClientStorage clientStorage)
+        {
+            _clientStorage = clientStorage;
+        }
         public List<ClientViewModel> Read(ClientBindingModel model)
         {
             if (model == null)
