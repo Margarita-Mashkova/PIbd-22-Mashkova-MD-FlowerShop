@@ -13,6 +13,7 @@ namespace FlowerShopDatabaseImplement.Implements
 {
     public class ClientStorage : IClientStorage 
     {
+        //TODO: исправить
         public List<ClientViewModel> GetFullList()
         {
             using var context = new FlowerShopDatabase();
@@ -28,7 +29,8 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             using var context = new FlowerShopDatabase();
             return context.Clients
-            .Where(rec => rec.ClientFIO.Contains(model.ClientFIO))
+            .Include(rec => rec.Orders) ///////////
+            .Where(rec => rec.ClientFIO == model.ClientFIO) //////////////
             .Select(CreateModel)
             .ToList();
         }
@@ -40,7 +42,8 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             using var context = new FlowerShopDatabase();
             var client = context.Clients
-            .FirstOrDefault(rec => rec.ClientFIO == model.ClientFIO || rec.Id == model.Id);
+            .Include(rec => rec.Orders) //////////
+            .FirstOrDefault(rec => rec.ClientFIO == model.ClientFIO || rec.Id == model.Id); //////////
             return client != null ? CreateModel(client) : null;
         }
         public void Insert(ClientBindingModel model)
