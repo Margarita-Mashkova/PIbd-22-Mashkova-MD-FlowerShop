@@ -1,25 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlowerShopDatabaseImplement.Models
 {
-    /// Компонент, требуемый для изготовления изделия
-    public class Component
-    {
+	public class Storehouse
+	{
         public int Id { get; set; }
 
         [Required]
-        public string ComponentName { get; set; }
+        public string StorehouseName { get; set; }
 
-        [ForeignKey("ComponentId")]
-        public virtual List<FlowerComponent> FlowerComponents { get; set; }
+        [Required]
+        public string ResponsibleFullName { get; set; }
 
-        [ForeignKey("ComponentId")]
+        [Required]
+        public DateTime DateCreate { get; set; }
+
+        [ForeignKey("StorehouseId")]
         public virtual List<StorehouseComponent> StorehouseComponents { get; set; }
     }
 }
