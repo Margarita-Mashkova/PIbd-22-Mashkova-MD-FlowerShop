@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlowerShopFileImplement", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlowerShopDatabaseImplement", "FlowerShopDatabaseImplement\FlowerShopDatabaseImplement.csproj", "{1EE4AC84-01C2-4DF4-A496-61886E04A5D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowerShopRestApi", "FlowerShopRestApi\FlowerShopRestApi.csproj", "{9F837328-D9A0-484C-814D-F81EF7D5E310}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlowerShopRestApi", "FlowerShopRestApi\FlowerShopRestApi.csproj", "{9F837328-D9A0-484C-814D-F81EF7D5E310}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowerShopClientApp", "FlowerShopClientApp\FlowerShopClientApp.csproj", "{D15AEC55-8EA3-4CFC-B87B-A25581F9D76D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{9F837328-D9A0-484C-814D-F81EF7D5E310}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F837328-D9A0-484C-814D-F81EF7D5E310}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F837328-D9A0-484C-814D-F81EF7D5E310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D15AEC55-8EA3-4CFC-B87B-A25581F9D76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D15AEC55-8EA3-4CFC-B87B-A25581F9D76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D15AEC55-8EA3-4CFC-B87B-A25581F9D76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D15AEC55-8EA3-4CFC-B87B-A25581F9D76D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
