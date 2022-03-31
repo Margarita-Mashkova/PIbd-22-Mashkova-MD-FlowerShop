@@ -56,6 +56,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel 
             { 
                 Id = order.Id,
+                ClientId=order.ClientId,
                 FlowerId = order.FlowerId,
                 Sum = order.Sum,
                 Count = order.Count,

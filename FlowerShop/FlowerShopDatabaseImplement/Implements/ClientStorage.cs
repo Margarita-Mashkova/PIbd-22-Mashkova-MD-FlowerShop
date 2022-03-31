@@ -30,7 +30,7 @@ namespace FlowerShopDatabaseImplement.Implements
             using var context = new FlowerShopDatabase();
             return context.Clients
             .Include(rec => rec.Orders) ///////////
-            .Where(rec => rec.ClientFIO == model.ClientFIO) //////////////
+            .Where(rec => rec.Email == model.Email) //////////////
             .Select(CreateModel)
             .ToList();
         }
