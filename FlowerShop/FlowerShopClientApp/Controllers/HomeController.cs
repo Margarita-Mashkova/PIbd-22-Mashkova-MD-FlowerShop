@@ -123,7 +123,6 @@ namespace FlowerShopClientApp.Controllers
             {
                 return;
             }
-            //TODO: прописать запрос
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 ClientId = Program.Client.Id,

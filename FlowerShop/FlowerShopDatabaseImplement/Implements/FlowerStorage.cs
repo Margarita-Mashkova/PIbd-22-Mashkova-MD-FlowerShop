@@ -139,7 +139,6 @@ namespace FlowerShopDatabaseImplement.Implements
             }
             return flower;
         }
-        //TODO: сделать вывод имени компонентов в рестапи
         private static FlowerViewModel CreateModel(Flower flower)
         {
             return new FlowerViewModel

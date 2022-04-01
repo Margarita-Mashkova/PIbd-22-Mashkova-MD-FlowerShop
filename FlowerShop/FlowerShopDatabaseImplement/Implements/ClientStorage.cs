@@ -43,7 +43,7 @@ namespace FlowerShopDatabaseImplement.Implements
             using var context = new FlowerShopDatabase();
             var client = context.Clients
             .Include(rec => rec.Orders) //////////
-            .FirstOrDefault(rec => rec.Email == model.Email || rec.Id == model.Id); //////////
+            .FirstOrDefault(rec => rec.Email == model.Email || rec.Id == model.Id);
             return client != null ? CreateModel(client) : null;
         }
         public void Insert(ClientBindingModel model)
