@@ -83,6 +83,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
+                ClientId = order.ClientId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
@@ -108,6 +109,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
+                ClientId=order.ClientId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
