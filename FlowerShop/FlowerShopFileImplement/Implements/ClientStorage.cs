@@ -27,7 +27,7 @@ namespace FlowerShopFileImplement.Implements
             {
                 return null;
             }
-            return source.Clients.Where(rec => rec.ClientFIO.Contains(model.ClientFIO)).Select(CreateModel).ToList();
+            return source.Clients.Where(rec => rec.Email.Contains(model.Email)).Select(CreateModel).ToList();
         }
         public ClientViewModel GetElement(ClientBindingModel model)
         {
@@ -35,7 +35,7 @@ namespace FlowerShopFileImplement.Implements
             {
                 return null;
             }
-            var client = source.Clients.FirstOrDefault(rec => rec.ClientFIO == model.ClientFIO || rec.Id == model.Id);
+            var client = source.Clients.FirstOrDefault(rec => rec.Email == model.Email || rec.Id == model.Id);
             return client != null ? CreateModel(client) : null;
         }
         public void Insert(ClientBindingModel model)

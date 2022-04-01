@@ -14,6 +14,8 @@
     <ProjectReference Include="..\FlowerShopBusinessLogic\FlowerShopBusinessLogic.csproj" />
     <ProjectReference Include="..\FlowerShopConracts\FlowerShopConracts.csproj" />
     <ProjectReference Include="..\FlowerShopDatabaseImplement\FlowerShopDatabaseImplement.csproj" />
+    <ProjectReference Include="..\FlowerShopFileImplement\FlowerShopFileImplement.csproj" />
+    <ProjectReference Include="..\FlowerShopListImplement\FlowerShopListImplement.csproj" />
   </ItemGroup>
 
 </Project>

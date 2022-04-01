@@ -35,7 +35,7 @@ namespace FlowerShopListImplement.Implements
             var result = new List<ClientViewModel>();
             foreach (var client in source.Clients)
             {
-                if (client.ClientFIO.Contains(model.ClientFIO))
+                if (client.Email.Contains(model.Email))
                 {
                     result.Add(CreateModel(client));
                 }
@@ -50,7 +50,7 @@ namespace FlowerShopListImplement.Implements
             }
             foreach (var client in source.Clients)
             {
-                if (client.Id == model.Id || client.ClientFIO == model.ClientFIO)
+                if (client.Id == model.Id || client.Email == model.Email)
                 {
                     return CreateModel(client);
                 }
