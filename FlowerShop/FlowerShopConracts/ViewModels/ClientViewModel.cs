@@ -4,25 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Runtime.Serialization;
+//using System.Runtime.Serialization;
 
 namespace FlowerShopConracts.ViewModels
 {
-    [DataContract]
+     // [DataContract]
     public class ClientViewModel
     {
-        [DataMember]
+        //[DataMember]
         public int Id { get; set; }
         
-        [DataMember]
+        //[DataMember]
         [DisplayName("ФИО")]
         public string ClientFIO { get; set; }
 
-        [DataMember]
+        //[DataMember]
         [DisplayName("Логин")]
         public string Email { get; set; }
 
-        [DataMember]
+        //[DataMember]
         [DisplayName("Пароль")]
         public string Password { get; set; }
     }
