@@ -17,22 +17,33 @@ namespace FlowerShopView
     {
         private readonly IFlowerLogic _logicF;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(IFlowerLogic logicF, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+        public FormCreateOrder(IFlowerLogic logicF, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicF = logicF;
             _logicO = logicO;
+            _logicC = logicC;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
-            ///При загрузке формы подгружаем список изделий.
-            List<FlowerViewModel> list = _logicF.Read(null);
-            if (list != null)
+            ///При загрузке формы подгружаем список букетов.
+            List<FlowerViewModel> listF = _logicF.Read(null);
+            if (listF != null)
             {
                 comboBoxFlower.DisplayMember = "FlowerName";
                 comboBoxFlower.ValueMember = "Id";
-                comboBoxFlower.DataSource = list;
+                comboBoxFlower.DataSource = listF;
                 comboBoxFlower.SelectedItem = null;
+            }
+            ///При загрузке формы подгружаем список клиентов.
+            List<ClientViewModel> listC = _logicC.Read(null);
+            if (listC != null)
+            {
+                comboBoxClient.DisplayMember = "ClientFIO";
+                comboBoxClient.ValueMember = "Id";
+                comboBoxClient.DataSource = listC;
+                comboBoxClient.SelectedItem = null;
             }
         }
         private void CalcSum()
@@ -42,14 +53,13 @@ namespace FlowerShopView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxFlower.SelectedValue);
-                    FlowerViewModel product = _logicF.Read(new FlowerBindingModel { Id = id  })?[0];
+                    FlowerViewModel flower = _logicF.Read(new FlowerBindingModel { Id = id  })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxSum.Text = (count * product?.Price ?? 0).ToString();
+                    textBoxSum.Text = (count * flower?.Price ?? 0).ToString();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -73,10 +83,16 @@ namespace FlowerShopView
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     FlowerId = Convert.ToInt32(comboBoxFlower.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)

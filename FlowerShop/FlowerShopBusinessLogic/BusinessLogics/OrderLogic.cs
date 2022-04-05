@@ -32,6 +32,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 FlowerId = model.FlowerId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = FlowerShopConracts.Enums.OrderStatus.Принят,
@@ -55,6 +56,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel 
             { 
                 Id = order.Id,
+                ClientId=order.ClientId,
                 FlowerId = order.FlowerId,
                 Sum = order.Sum,
                 Count = order.Count,
@@ -81,6 +83,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
+                ClientId = order.ClientId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
@@ -106,6 +109,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
+                ClientId=order.ClientId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
