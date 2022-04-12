@@ -14,7 +14,8 @@ namespace FlowerShopConracts.ViewModels
         public int Id { get; set; }
         public int FlowerId { get; set; }
         public int ClientId { get; set; }
-
+        public int ImplementerId { get; set; }
+        
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
 
@@ -26,6 +27,9 @@ namespace FlowerShopConracts.ViewModels
         
         [DisplayName("Сумма")]
         public decimal Sum { get; set; }
+
+        [DisplayName("Исполнитель")]
+        public string ImplementerFIO { get; set; }
 
         [DisplayName("Статус")]
         public string Status { get; set; }

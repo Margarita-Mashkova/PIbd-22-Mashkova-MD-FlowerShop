@@ -4,6 +4,7 @@ using FlowerShopDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowerShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(FlowerShopDatabase))]
-    partial class FlowerShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220412175241_AddImplementer")]
+    partial class AddImplementer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +46,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Component", b =>
@@ -61,7 +63,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Components", (string)null);
+                    b.ToTable("Components");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Flower", b =>
@@ -81,7 +83,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Flowers", (string)null);
+                    b.ToTable("Flowers");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.FlowerComponent", b =>
@@ -107,7 +109,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasIndex("FlowerId");
 
-                    b.ToTable("FlowerComponents", (string)null);
+                    b.ToTable("FlowerComponents");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Implementer", b =>
@@ -130,7 +132,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Implementers", (string)null);
+                    b.ToTable("Implementers");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Order", b =>
@@ -174,7 +176,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasIndex("ImplementerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.FlowerComponent", b =>
