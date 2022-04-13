@@ -165,5 +165,10 @@ namespace FlowerShopView
                 MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        private void компонентыНаСкладахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportStorehouseComponents>();
+            form.ShowDialog();
+        }
     }
 }

@@ -38,13 +38,14 @@
             this.списокБукетовToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыПоБукетамToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.таблицаСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
-            this.таблицаСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.компонентыНаСкладахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -105,7 +106,8 @@
             this.списокБукетовToolStripMenuItem1,
             this.компонентыПоБукетамToolStripMenuItem1,
             this.списокЗаказовToolStripMenuItem1,
-            this.таблицаСкладовToolStripMenuItem});
+            this.таблицаСкладовToolStripMenuItem,
+            this.компонентыНаСкладахToolStripMenuItem});
             this.отчётыToolStripMenuItem1.Name = "отчётыToolStripMenuItem1";
             this.отчётыToolStripMenuItem1.Size = new System.Drawing.Size(60, 20);
             this.отчётыToolStripMenuItem1.Text = "Отчёты";
@@ -130,6 +132,13 @@
             this.списокЗаказовToolStripMenuItem1.Size = new System.Drawing.Size(210, 22);
             this.списокЗаказовToolStripMenuItem1.Text = "Список заказов";
             this.списокЗаказовToolStripMenuItem1.Click += new System.EventHandler(this.списокЗаказовToolStripMenuItem1_Click);
+            // 
+            // таблицаСкладовToolStripMenuItem
+            // 
+            this.таблицаСкладовToolStripMenuItem.Name = "таблицаСкладовToolStripMenuItem";
+            this.таблицаСкладовToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.таблицаСкладовToolStripMenuItem.Text = "Таблица складов";
+            this.таблицаСкладовToolStripMenuItem.Click += new System.EventHandler(this.таблицаСкладовToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -191,12 +200,12 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
-            // таблицаСкладовToolStripMenuItem
+            // компонентыНаСкладахToolStripMenuItem
             // 
-            this.таблицаСкладовToolStripMenuItem.Name = "таблицаСкладовToolStripMenuItem";
-            this.таблицаСкладовToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.таблицаСкладовToolStripMenuItem.Text = "Таблица складов";
-            this.таблицаСкладовToolStripMenuItem.Click += new System.EventHandler(this.таблицаСкладовToolStripMenuItem_Click);
+            this.компонентыНаСкладахToolStripMenuItem.Name = "компонентыНаСкладахToolStripMenuItem";
+            this.компонентыНаСкладахToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.компонентыНаСкладахToolStripMenuItem.Text = "Компоненты на складах";
+            this.компонентыНаСкладахToolStripMenuItem.Click += new System.EventHandler(this.компонентыНаСкладахToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -241,5 +250,6 @@
         private ToolStripMenuItem компонентыПоБукетамToolStripMenuItem1;
         private ToolStripMenuItem списокЗаказовToolStripMenuItem1;
         private ToolStripMenuItem таблицаСкладовToolStripMenuItem;
+        private ToolStripMenuItem компонентыНаСкладахToolStripMenuItem;
     }
 }
