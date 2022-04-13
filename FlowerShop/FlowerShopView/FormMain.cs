@@ -153,5 +153,15 @@ namespace FlowerShopView
             var form = Program.Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
+
+        private void складыToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void пополнениеСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

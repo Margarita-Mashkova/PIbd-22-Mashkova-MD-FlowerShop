@@ -44,6 +44,7 @@
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
             this.пополнениеСкладаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пополнениеСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справочникиToolStripMenuItem});
+            this.справочникиToolStripMenuItem,
+            this.пополнениеСкладовToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1076, 24);
@@ -81,6 +83,33 @@
             this.букетыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.букетыToolStripMenuItem.Text = "Букеты";
             this.букетыToolStripMenuItem.Click += new System.EventHandler(this.букетыToolStripMenuItem_Click);
+            // 
+            // складыToolStripMenuItem
+            // 
+            this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
+            this.складыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.складыToolStripMenuItem.Text = "Склады";
+            this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click_1);
+            // 
+            // отчётыToolStripMenuItem
+            // 
+            this.отчётыToolStripMenuItem.Name = "отчётыToolStripMenuItem";
+            this.отчётыToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            // 
+            // списокБукетовToolStripMenuItem
+            // 
+            this.списокБукетовToolStripMenuItem.Name = "списокБукетовToolStripMenuItem";
+            this.списокБукетовToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            // 
+            // компонентыПоБукетамToolStripMenuItem
+            // 
+            this.компонентыПоБукетамToolStripMenuItem.Name = "компонентыПоБукетамToolStripMenuItem";
+            this.компонентыПоБукетамToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            // 
+            // списокЗаказовToolStripMenuItem
+            // 
+            this.списокЗаказовToolStripMenuItem.Name = "списокЗаказовToolStripMenuItem";
+            this.списокЗаказовToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
             // dataGridView
             // 
@@ -149,6 +178,13 @@
             this.пополнениеСкладаToolStripMenuItem.Text = "Пополнение склада";
             this.пополнениеСкладаToolStripMenuItem.Click += new System.EventHandler(this.пополнениеСкладаToolStripMenuItem_Click);
             // 
+            // пополнениеСкладовToolStripMenuItem
+            // 
+            this.пополнениеСкладовToolStripMenuItem.Name = "пополнениеСкладовToolStripMenuItem";
+            this.пополнениеСкладовToolStripMenuItem.Size = new System.Drawing.Size(136, 20);
+            this.пополнениеСкладовToolStripMenuItem.Text = "Пополнение складов";
+            this.пополнениеСкладовToolStripMenuItem.Click += new System.EventHandler(this.пополнениеСкладовToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -179,11 +215,18 @@
         private ToolStripMenuItem справочникиToolStripMenuItem;
         private ToolStripMenuItem компонентыToolStripMenuItem;
         private ToolStripMenuItem букетыToolStripMenuItem;
+        private ToolStripMenuItem складыToolStripMenuItem;
+        private ToolStripMenuItem отчётыToolStripMenuItem;
+        private ToolStripMenuItem списокБукетовToolStripMenuItem;
+        private ToolStripMenuItem компонентыПоБукетамToolStripMenuItem;
+        private ToolStripMenuItem списокЗаказовToolStripMenuItem;
         private DataGridView dataGridView;
         private Button buttonCreateOrder;
         private Button buttonTakeOrderInWork;
         private Button buttonOrderReady;
         private Button buttonIssuedOrder;
         private Button buttonRef;
+        private ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
+        private ToolStripMenuItem пополнениеСкладовToolStripMenuItem;
     }
 }

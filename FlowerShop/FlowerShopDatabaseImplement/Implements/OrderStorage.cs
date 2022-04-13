@@ -115,7 +115,7 @@ namespace FlowerShopDatabaseImplement.Implements
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId, 
-                FlowerName = context.Flowers.FirstOrDefault(flowerName => flowerName.Id == order.FlowerId)?.FlowerName,
+                //FlowerName = context.Flowers.FirstOrDefault(flowerName => flowerName.Id == order.FlowerId)?.FlowerName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),
