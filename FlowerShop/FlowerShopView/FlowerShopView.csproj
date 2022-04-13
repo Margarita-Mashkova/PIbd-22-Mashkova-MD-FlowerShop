@@ -9,15 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.16" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FlowerShopBusinessLogic\FlowerShopBusinessLogic.csproj" />
+    <ProjectReference Include="..\FlowerShopConracts\FlowerShopConracts.csproj" />
     <ProjectReference Include="..\FlowerShopDatabaseImplement\FlowerShopDatabaseImplement.csproj" />
     <ProjectReference Include="..\FlowerShopFileImplement\FlowerShopFileImplement.csproj" />
     <ProjectReference Include="..\FlowerShopListImplement\FlowerShopListImplement.csproj" />
