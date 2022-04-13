@@ -16,13 +16,16 @@ namespace FlowerShopConracts.BusinessLogicsContracts
         // Получение списка заказов за определенный период
         List<ReportOrdersViewModel> GetOrders(ReportBindingModel model);
 
-        // Сохранение компонент в файл-Word
-        void SaveComponentsToWordFile(ReportBindingModel model);
+        // Сохранение букетов в файл-Word
+        void SaveFlowersToWordFile(ReportBindingModel model);
 
         // Сохранение компонент с указаеним букетов в файл-Excel
         void SaveFlowerComponentToExcelFile(ReportBindingModel model);
 
         // Сохранение заказов в файл-Pdf
         void SaveOrdersToPdfFile(ReportBindingModel model);
+
+        // Сохранение складов в файл-Word в табличном виде
+        void SaveStorehousesToWordFile(ReportBindingModel model);
     }
 }

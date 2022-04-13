@@ -12,25 +12,27 @@ namespace FlowerShopBusinessLogic.OfficePackage
     {
         public void CreateDoc(WordInfo info)
         {
-            CreateWord(info);
-            CreateParagraph(new WordParagraph
+            if (info.ReportType == WordReportType.ReportFlowers)
             {
-                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties {
+                CreateWord(info);
+                CreateParagraph(new WordParagraph
+                {
+                    Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties {
                     Bold = true,
                     Size = "24",
                 })
                 },
-                TextProperties = new WordTextProperties
+                    TextProperties = new WordTextProperties
+                    {
+                        Size = "24",
+                        JustificationType = WordJustificationType.Center
+                    }
+                });
+                foreach (var flower in info.Flowers)
                 {
-                    Size = "24",
-                    JustificationType = WordJustificationType.Center
-                }
-            });
-            foreach (var flower in info.Flowers)
-            {
-                CreateParagraph(new WordParagraph
-                {
-                    Texts = new List<(string, WordTextProperties)> {
+                    CreateParagraph(new WordParagraph
+                    {
+                        Texts = new List<(string, WordTextProperties)> {
                         (flower.FlowerName + ": ", new WordTextProperties {
                         Size = "24",
                         Bold = true
@@ -39,17 +41,37 @@ namespace FlowerShopBusinessLogic.OfficePackage
                         Size = "24"
                         })
                     },
-                    TextProperties = new WordTextProperties
+                        TextProperties = new WordTextProperties
+                        {
+                            Size = "24",
+                            JustificationType = WordJustificationType.Both
+                        }
+                    });
+                }
+                SaveWord(info);
+            }
+            if (info.ReportType == WordReportType.ReportStorhouses)
+            {
+                CreateWord(info);
+                CreateTable(new WordTable
+                {
+                    Header = info.Title,
+                    Rows = info.Storehouses,
+                    TableProperties = new WordTableProperties 
                     {
-                        Size = "24",
-                        JustificationType = WordJustificationType.Both
+                        TextSize = "45",
+                        BorderSize = "7",
+                        BorderType = WordBorderType.Wave
                     }
                 });
+                SaveWord(info);
             }
-            SaveWord(info);
         }
         // Создание doc-файла
         protected abstract void CreateWord(WordInfo info);
+        
+        // Создание таблицы в Word
+        protected abstract void CreateTable(WordTable wordTable);
 
         // Создание абзаца с текстом
         protected abstract void CreateParagraph(WordParagraph paragraph);

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FlowerShopBusinessLogic.OfficePackage;
 using FlowerShopBusinessLogic.OfficePackage.HelperModels;
+using FlowerShopBusinessLogic.OfficePackage.HelperEnums;
 using FlowerShopConracts.BindingModels;
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.StoragesContracts;
@@ -18,15 +19,17 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         private readonly IComponentStorage _componentStorage;
         private readonly IFlowerStorage _flowerStorage;
         private readonly IOrderStorage _orderStorage;
+        private readonly IStorehouseStorage _storehouseStorage;
         private readonly AbstractSaveToExcel _saveToExcel;
         private readonly AbstractSaveToWord _saveToWord;
         private readonly AbstractSaveToPdf _saveToPdf;
-        public ReportLogic(IFlowerStorage flowerStorage, IComponentStorage componentStorage, IOrderStorage orderStorage,
-                            AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord, AbstractSaveToPdf saveToPdf)
+        public ReportLogic(IFlowerStorage flowerStorage, IComponentStorage componentStorage, IOrderStorage orderStorage, 
+            IStorehouseStorage storehouseStorage, AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord, AbstractSaveToPdf saveToPdf)
         {
             _flowerStorage = flowerStorage;
             _componentStorage = componentStorage;
             _orderStorage = orderStorage;
+            _storehouseStorage = storehouseStorage;
             _saveToExcel = saveToExcel;
             _saveToWord = saveToWord;
             _saveToPdf = saveToPdf;
@@ -74,14 +77,15 @@ namespace FlowerShopBusinessLogic.BusinessLogics
            .ToList();
         }
 
-        // Сохранение компонент в файл-Word
-        public void SaveComponentsToWordFile(ReportBindingModel model)
+        // Сохранение букетов в файл-Word
+        public void SaveFlowersToWordFile(ReportBindingModel model)
         {
             _saveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
                 Title = "Список букетов",
-                Flowers = _flowerStorage.GetFullList()
+                Flowers = _flowerStorage.GetFullList(),
+                ReportType = WordReportType.ReportFlowers
             });
         }
 
@@ -106,6 +110,18 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+
+        // Сохранение складов в файл-Word
+        public void SaveStorehousesToWordFile(ReportBindingModel model)
+        {
+            _saveToWord.CreateDoc(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Таблица складов",
+                Storehouses = _storehouseStorage.GetFullList(),
+                ReportType = WordReportType.ReportStorhouses
             });
         }
     }
