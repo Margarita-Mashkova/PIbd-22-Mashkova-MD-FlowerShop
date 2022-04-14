@@ -24,9 +24,13 @@ namespace FlowerShopRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<IFlowerStorage, FlowerStorage>();
+            services.AddTransient<IStorehouseStorage, StorehouseStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IFlowerLogic, FlowerLogic>();
+            services.AddTransient<IStorehouseLogic, StorehouseLogic>();
+            services.AddTransient<IComponentLogic, ComponentLogic>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

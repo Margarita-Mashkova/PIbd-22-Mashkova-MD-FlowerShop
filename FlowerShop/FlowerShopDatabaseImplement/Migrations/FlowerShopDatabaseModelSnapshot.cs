@@ -255,6 +255,11 @@ namespace FlowerShopDatabaseImplement.Migrations
                     b.Navigation("Storehouse");
                 });
 
+            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Client", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("FlowerComponents");
