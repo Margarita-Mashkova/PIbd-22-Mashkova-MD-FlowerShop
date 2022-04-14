@@ -19,6 +19,7 @@ namespace FlowerShopDatabaseImplement.Implements
             return context.Orders
                 .Include(rec => rec.Flower)
                 .Include(rec => rec.Client)
+                .Include(rec => rec.Implementer)
                 .ToList()
                 .Select(CreateModel)
                 .ToList();
@@ -52,6 +53,7 @@ namespace FlowerShopDatabaseImplement.Implements
             var order = context.Orders
             .Include(rec => rec.Flower)
             .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
             .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
@@ -110,6 +112,7 @@ namespace FlowerShopDatabaseImplement.Implements
         {
             order.FlowerId = model.FlowerId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -126,6 +129,8 @@ namespace FlowerShopDatabaseImplement.Implements
                 ClientFIO = order.Client.ClientFIO,
                 FlowerId = order.FlowerId,
                 FlowerName = order.Flower.FlowerName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = order.ImplementerId.HasValue ? order.Implementer.ImplementerFIO : string.Empty,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),

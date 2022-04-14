@@ -14,7 +14,7 @@ namespace FlowerShopConracts.ViewModels
         public int Id { get; set; }
         public int FlowerId { get; set; }
         public int ClientId { get; set; }
-        public int ImplementerId { get; set; }
+        public int? ImplementerId { get; set; }
         
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
