@@ -17,6 +17,7 @@ namespace FlowerShopConracts.ViewModels
 
         [DisplayName("Цена")]
         public decimal Price { get; set; }
+
         public Dictionary<int, (string, int)> FlowerComponents { get; set; }
     }
 }

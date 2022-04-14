@@ -24,6 +24,6 @@ namespace FlowerShopDatabaseImplement
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Storehouse> Storehouses { set; get; }
         public virtual DbSet<StorehouseComponent> StorehouseComponents { set; get; }
-
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }
