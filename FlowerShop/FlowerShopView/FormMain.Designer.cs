@@ -39,13 +39,14 @@
             this.компонентыПоБукетамToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицаСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.компонентыНаСкладахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
-            this.компонентыНаСкладахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заказыПоДатамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -107,7 +108,8 @@
             this.компонентыПоБукетамToolStripMenuItem1,
             this.списокЗаказовToolStripMenuItem1,
             this.таблицаСкладовToolStripMenuItem,
-            this.компонентыНаСкладахToolStripMenuItem});
+            this.компонентыНаСкладахToolStripMenuItem,
+            this.заказыПоДатамToolStripMenuItem});
             this.отчётыToolStripMenuItem1.Name = "отчётыToolStripMenuItem1";
             this.отчётыToolStripMenuItem1.Size = new System.Drawing.Size(60, 20);
             this.отчётыToolStripMenuItem1.Text = "Отчёты";
@@ -139,6 +141,13 @@
             this.таблицаСкладовToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.таблицаСкладовToolStripMenuItem.Text = "Таблица складов";
             this.таблицаСкладовToolStripMenuItem.Click += new System.EventHandler(this.таблицаСкладовToolStripMenuItem_Click);
+            // 
+            // компонентыНаСкладахToolStripMenuItem
+            // 
+            this.компонентыНаСкладахToolStripMenuItem.Name = "компонентыНаСкладахToolStripMenuItem";
+            this.компонентыНаСкладахToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.компонентыНаСкладахToolStripMenuItem.Text = "Компоненты на складах";
+            this.компонентыНаСкладахToolStripMenuItem.Click += new System.EventHandler(this.компонентыНаСкладахToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -200,12 +209,12 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
-            // компонентыНаСкладахToolStripMenuItem
+            // заказыПоДатамToolStripMenuItem
             // 
-            this.компонентыНаСкладахToolStripMenuItem.Name = "компонентыНаСкладахToolStripMenuItem";
-            this.компонентыНаСкладахToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.компонентыНаСкладахToolStripMenuItem.Text = "Компоненты на складах";
-            this.компонентыНаСкладахToolStripMenuItem.Click += new System.EventHandler(this.компонентыНаСкладахToolStripMenuItem_Click);
+            this.заказыПоДатамToolStripMenuItem.Name = "заказыПоДатамToolStripMenuItem";
+            this.заказыПоДатамToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.заказыПоДатамToolStripMenuItem.Text = "Заказы по датам";
+            this.заказыПоДатамToolStripMenuItem.Click += new System.EventHandler(this.заказыПоДатамToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -251,5 +260,6 @@
         private ToolStripMenuItem списокЗаказовToolStripMenuItem1;
         private ToolStripMenuItem таблицаСкладовToolStripMenuItem;
         private ToolStripMenuItem компонентыНаСкладахToolStripMenuItem;
+        private ToolStripMenuItem заказыПоДатамToolStripMenuItem;
     }
 }

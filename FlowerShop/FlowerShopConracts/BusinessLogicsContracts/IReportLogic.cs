@@ -19,6 +19,9 @@ namespace FlowerShopConracts.BusinessLogicsContracts
         // Получение списка заказов за определенный период
         List<ReportOrdersViewModel> GetOrders(ReportBindingModel model);
 
+        // Получение списка заказов по датам
+        List<ReportOrdersByDateViewModel> GetOrdersByDate();
+
         // Сохранение букетов в файл-Word
         void SaveFlowersToWordFile(ReportBindingModel model);
 
@@ -33,5 +36,8 @@ namespace FlowerShopConracts.BusinessLogicsContracts
 
         // Сохранение заказов в файл-Pdf
         void SaveOrdersToPdfFile(ReportBindingModel model);
+
+        //  Сохранение заказов по датам в файл-Pdf
+        void SaveOrdersByDateToPdfFile(ReportBindingModel model);
     }
 }

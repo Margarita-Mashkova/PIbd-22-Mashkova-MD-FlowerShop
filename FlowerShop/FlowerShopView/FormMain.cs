@@ -170,5 +170,11 @@ namespace FlowerShopView
             var form = Program.Container.Resolve<FormReportStorehouseComponents>();
             form.ShowDialog();
         }
+
+        private void заказыПоДатамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrdersByDate>();
+            form.ShowDialog();
+        }
     }
 }

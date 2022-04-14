@@ -98,6 +98,18 @@ namespace FlowerShopBusinessLogic.BusinessLogics
            .ToList();
         }
 
+        // Получение списка заказов по датам
+        public List<ReportOrdersByDateViewModel> GetOrdersByDate()
+        {
+            return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date)
+                .Select(x => new ReportOrdersByDateViewModel
+                {
+                    DateCreate = x.Key,
+                    Count = x.Count(),
+                    Sum = x.Sum(rec => rec.Sum)
+                }).ToList();
+        }
+
         // Сохранение букетов в файл-Word
         public void SaveFlowersToWordFile(ReportBindingModel model)
         {
@@ -155,8 +167,21 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 Title = "Список заказов",
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
+                Orders = GetOrders(model),
+                ReportType = PdfReportType.OrdersByPeriods
             });
-        }       
+        }
+
+        // Сохранение заказов по датам в файл-Pdf
+        public void SaveOrdersByDateToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Заказы по датам",
+                OrdersByDate = GetOrdersByDate(),
+                ReportType = PdfReportType.OrdersByDate
+            });
+        }
     }
 }

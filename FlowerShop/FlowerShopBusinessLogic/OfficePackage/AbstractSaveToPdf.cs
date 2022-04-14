@@ -12,39 +12,74 @@ namespace FlowerShopBusinessLogic.OfficePackage
     {
         public void CreateDoc(PdfInfo info)
         {
-            CreatePdf(info);
-            CreateParagraph(new PdfParagraph
+            if (info.ReportType == PdfReportType.OrdersByPeriods)
             {
-                Text = info.Title,
-                Style = "NormalTitle"
-            });
-            CreateParagraph(new PdfParagraph
-            {
-                Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }", Style = "Normal"
-            });
-            CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
-            CreateRow(new PdfRowParameters
-            {
-                Texts = new List<string> { "Дата заказа", "Букет", "Количество", "Сумма", "Статус" },
-                Style = "NormalTitle",
-                ParagraphAlignment = PdfParagraphAlignmentType.Center
-            });           
-            foreach (var order in info.Orders)
-            {
+                CreatePdf(info);
+                CreateParagraph(new PdfParagraph
+                {
+                    Text = info.Title,
+                    Style = "NormalTitle"
+                });
+                CreateParagraph(new PdfParagraph
+                {
+                    Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }", Style = "Normal"
+                });
+                CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
                 CreateRow(new PdfRowParameters
                 {
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(), order.FlowerName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString()},
-                    Style = "Normal",
-                    ParagraphAlignment = PdfParagraphAlignmentType.Left
+                    Texts = new List<string> { "Дата заказа", "Букет", "Количество", "Сумма", "Статус" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = PdfParagraphAlignmentType.Center
                 });
+                foreach (var order in info.Orders)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Texts = new List<string> { order.DateCreate.ToShortDateString(), order.FlowerName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
+                        Style = "Normal",
+                        ParagraphAlignment = PdfParagraphAlignmentType.Left
+                    });
+                }
+                decimal sum = info.Orders.Sum(rec => rec.Sum);
+                CreateParagraph(new PdfParagraph
+                {
+                    Text = $"Итого: {sum}",
+                    Style = "NormalTitle",
+                });
+                SavePdf(info);
             }
-            decimal sum = info.Orders.Sum(rec => rec.Sum);
-            CreateParagraph(new PdfParagraph
+            if (info.ReportType == PdfReportType.OrdersByDate)
             {
-                Text = $"Итого: {sum}",
-                Style = "NormalTitle",
-            });
-            SavePdf(info);
+                CreatePdf(info);
+                CreateParagraph(new PdfParagraph
+                {
+                    Text = info.Title,
+                    Style = "NormalTitle"
+                });
+                CreateTable(new List<string> { "7cm", "5cm", "5cm"});
+                CreateRow(new PdfRowParameters
+                {
+                    Texts = new List<string> { "Дата заказа", "Количество", "Сумма" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = PdfParagraphAlignmentType.Center
+                });
+                foreach (var order in info.OrdersByDate)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Texts = new List<string> { order.DateCreate.ToShortDateString(), order.Count.ToString(), order.Sum.ToString() },
+                        Style = "Normal",
+                        ParagraphAlignment = PdfParagraphAlignmentType.Left
+                    });
+                }
+                decimal sum = info.OrdersByDate.Sum(rec => rec.Sum);
+                CreateParagraph(new PdfParagraph
+                {
+                    Text = $"Итого: {sum}",
+                    Style = "NormalTitle",
+                });
+                SavePdf(info);
+            }
         }
 
         // Создание doc-файла
