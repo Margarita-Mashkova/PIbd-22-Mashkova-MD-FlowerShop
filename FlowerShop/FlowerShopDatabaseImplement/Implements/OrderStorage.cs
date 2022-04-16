@@ -130,7 +130,7 @@ namespace FlowerShopDatabaseImplement.Implements
                 FlowerId = order.FlowerId,
                 FlowerName = order.Flower.FlowerName,
                 ImplementerId = order.ImplementerId,
-                ImplementerFIO = order.ImplementerId.HasValue ? order.Implementer.ImplementerFIO : string.Empty,
+                ImplementerFIO = order.Implementer?.ImplementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),
