@@ -1,4 +1,6 @@
 ﻿using FlowerShopBusinessLogic.BusinessLogics;
+using FlowerShopBusinessLogic.MailWorker;
+using FlowerShopConracts.BindingModels;
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.StoragesContracts;
 using FlowerShopDatabaseImplement.Implements;
@@ -24,9 +26,12 @@ namespace FlowerShopRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<IFlowerStorage, FlowerStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IFlowerLogic, FlowerLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -53,6 +58,17 @@ namespace FlowerShopRestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?.GetSection("MailLogin")?.ToString(),
+                MailPassword = Configuration?.GetSection("MailPassword")?.ToString(),
+                SmtpClientHost = Configuration?.GetSection("SmtpClientHost")?.ToString(),
+                SmtpClientPort = Convert.ToInt32(Configuration?.GetSection("SmtpClientPort")?.ToString()),
+                PopHost = Configuration?.GetSection("PopHost")?.ToString(),
+                PopPort = Convert.ToInt32(Configuration?.GetSection("PopPort")?.ToString())
             });
         }
     }
