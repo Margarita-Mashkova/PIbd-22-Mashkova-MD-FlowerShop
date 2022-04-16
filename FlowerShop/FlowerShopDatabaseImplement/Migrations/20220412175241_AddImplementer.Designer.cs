@@ -4,6 +4,7 @@ using FlowerShopDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowerShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(FlowerShopDatabase))]
-    partial class FlowerShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220412175241_AddImplementer")]
+    partial class AddImplementer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,6 +159,7 @@ namespace FlowerShopDatabaseImplement.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("ImplementerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -211,7 +214,9 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasOne("FlowerShopDatabaseImplement.Models.Implementer", "Implementer")
                         .WithMany("Orders")
-                        .HasForeignKey("ImplementerId");
+                        .HasForeignKey("ImplementerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 
