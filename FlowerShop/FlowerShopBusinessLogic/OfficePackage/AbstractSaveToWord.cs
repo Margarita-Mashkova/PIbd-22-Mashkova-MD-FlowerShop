@@ -59,7 +59,7 @@ namespace FlowerShopBusinessLogic.OfficePackage
                     Rows = info.Storehouses,
                     TableProperties = new WordTableProperties 
                     {
-                        TextSize = "45",
+                        TextSize = "14",
                         BorderSize = "7",
                         BorderType = WordBorderType.Wave
                     }
