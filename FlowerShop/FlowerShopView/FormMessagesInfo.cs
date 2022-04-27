@@ -23,6 +23,10 @@ namespace FlowerShopView
 
         private void FormMessagesInfo_Load(object sender, EventArgs e)
         {
+            LoadData();
+        }
+        private void LoadData() 
+        {
             try
             {
                 var list = _messageInfoLogic.Read(null);
@@ -37,6 +41,10 @@ namespace FlowerShopView
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void buttonRef_Click(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace FlowerShopBusinessLogic.BusinessLogics
 {
     public class OrderLogic : IOrderLogic
     {
-        //TODO: проверить отправку писем в методах
         private readonly IOrderStorage _orderStorage;
         private readonly IClientStorage _clientStorage;
         private readonly AbstractMailWorker _abstractMailWorker;
@@ -44,7 +43,6 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 Status = FlowerShopConracts.Enums.OrderStatus.Принят,
                 DateCreate = DateTime.Now
             });
-            //TODO: правильно ли?
             _abstractMailWorker.MailSendAsync(new MailSendInfoBindingModel
             {
                 MailAddress = _clientStorage.GetElement(new ClientBindingModel

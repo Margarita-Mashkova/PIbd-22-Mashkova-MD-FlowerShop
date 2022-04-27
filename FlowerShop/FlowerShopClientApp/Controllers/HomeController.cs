@@ -139,5 +139,11 @@ namespace FlowerShopClientApp.Controllers
             FlowerViewModel flow = APIClient.GetRequest<FlowerViewModel>($"api/main/getflower?flowerId={flower}");
             return count * flow.Price;
         }
+
+        [HttpGet]
+        public IActionResult MessageInfo()
+        {
+            return View();
+        }
     }
 }
