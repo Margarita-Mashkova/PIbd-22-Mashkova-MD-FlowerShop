@@ -9,13 +9,16 @@ using System.Net.Mail;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlowerShopConracts.StoragesContracts;
 
 namespace FlowerShopBusinessLogic.MailWorker
 {
     public class MailKitWorker : AbstractMailWorker
     {
-        public MailKitWorker(IMessageInfoLogic messageInfoLogic) : base(messageInfoLogic)
+        private IClientStorage _clientStorage;
+        public MailKitWorker(IMessageInfoLogic messageInfoLogic, IClientStorage clientStorage) : base(messageInfoLogic)
         {
+            _clientStorage = clientStorage;
         }
         protected override async Task SendMailAsync(MailSendInfoBindingModel info)
         {
@@ -40,6 +43,7 @@ namespace FlowerShopBusinessLogic.MailWorker
                 throw;
             }
         }
+        //TODO: clientId
         protected override async Task<List<MessageInfoBindingModel>> ReceiveMailAsync()
         {
             var list = new List<MessageInfoBindingModel>();
@@ -57,6 +61,7 @@ namespace FlowerShopBusinessLogic.MailWorker
                         {
                             list.Add(new MessageInfoBindingModel
                             {
+                                ClientId = _clientStorage.GetElement(new ClientBindingModel { Email = mail.Address })?.Id,
                                 DateDelivery = message.Date.DateTime,
                                 MessageId = message.MessageId,
                                 FromMailAddress = mail.Address,

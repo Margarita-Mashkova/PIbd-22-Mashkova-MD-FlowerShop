@@ -143,6 +143,7 @@ namespace FlowerShopClientApp.Controllers
         [HttpGet]
         public IActionResult MessageInfo()
         {
+            ViewBag.MessagesInfo = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}");
             return View();
         }
     }

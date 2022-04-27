@@ -11,9 +11,10 @@ namespace FlowerShopRestApi.Controllers
     {
         private readonly IClientLogic _clientLogic;
         private readonly IMessageInfoLogic _messageLogic;
-        public ClientController(IClientLogic clientLogic)
+        public ClientController(IClientLogic clientLogic, IMessageInfoLogic messageLogic)
         {
             _clientLogic = clientLogic;
+            _messageLogic = messageLogic;
         }
 
         [HttpGet]
