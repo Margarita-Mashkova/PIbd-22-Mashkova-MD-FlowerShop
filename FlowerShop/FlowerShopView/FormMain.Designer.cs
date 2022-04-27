@@ -35,7 +35,6 @@
             this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пополнениеСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.исполнителиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчётыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокБукетовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +57,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
             this.пополнениеСкладовToolStripMenuItem,
-            this.отчётыToolStripMenuItem});
             this.отчётыToolStripMenuItem,
             this.запускРаботToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -73,7 +71,6 @@
             this.компонентыToolStripMenuItem,
             this.букетыToolStripMenuItem,
             this.складыToolStripMenuItem,
-            this.клиентыToolStripMenuItem});
             this.клиентыToolStripMenuItem,
             this.исполнителиToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
@@ -264,7 +261,6 @@
         private ToolStripMenuItem списокБукетовToolStripMenuItem;
         private ToolStripMenuItem компонентыПоБукетамToolStripMenuItem;
         private ToolStripMenuItem списокЗаказовToolStripMenuItem;
-        private ToolStripMenuItem клиентыToolStripMenuItem;
         private ToolStripMenuItem исполнителиToolStripMenuItem;
         private ToolStripMenuItem запускРаботToolStripMenuItem;
         private ToolStripMenuItem заказыПоДатамToolStripMenuItem;

@@ -32,6 +32,7 @@ namespace FlowerShopFileImplement
             Flowers = LoadFlowers();
             Clients = LoadClients();
             Implementers = LoadImplementers();
+            Storehouses = LoadStorehouses();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -48,6 +49,7 @@ namespace FlowerShopFileImplement
             instance.SaveFlowers();
             instance.SaveClients();
             instance.SaveImplementers();
+            instance.SaveStorehouses();
         }
         private List<Component> LoadComponents()
         {
@@ -251,6 +253,31 @@ namespace FlowerShopFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(FlowerFileName);
+            }
+        }
+        private void SaveStorehouses()
+        {
+            if (Storehouses != null)
+            {
+                var xElement = new XElement("Storehouses");
+                foreach (var storehouse in Storehouses)
+                {
+                    var compElement = new XElement("StorehouseComponents");
+                    foreach (var component in storehouse.StorehouseComponents)
+                    {
+                        compElement.Add(new XElement("StorehouseComponent",
+                            new XElement("Key", component.Key),
+                            new XElement("Value", component.Value)));
+                    }
+                    xElement.Add(new XElement("Storehouse",
+                        new XAttribute("Id", storehouse.Id),
+                        new XElement("StorehouseName", storehouse.StorehouseName),
+                        new XElement("ResponsibleFullName", storehouse.ResponsibleFullName),
+                        new XElement("DateCreate", storehouse.DateCreate.ToString()),
+                        compElement));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(StorehouseFileName);
             }
         }
         private void SaveClients()
