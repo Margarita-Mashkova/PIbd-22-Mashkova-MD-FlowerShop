@@ -54,14 +54,15 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!order.Status.Equals("Принят"))
+            if (!order.Status.Equals("Принят") && !order.Status.Equals("Требуются_материалы"))
             {
-                throw new Exception($"Невозможно обработать заказ, т.к. он не имеет статуса {OrderStatus.Принят}");
+                throw new Exception($"Невозможно обработать заказ, т.к. он не имеет статуса {OrderStatus.Принят} или {OrderStatus.Требуются_материалы}");
             }
             var flower = _flowerStorage.GetElement(new FlowerBindingModel { Id = order.FlowerId});
             if (!_storehouseStorage.CheckAvailability(order.Count, flower.FlowerComponents))
             {
                 status = OrderStatus.Требуются_материалы;
+                model.ImplementerId = null;
             }
             _orderStorage.Update(new OrderBindingModel
             {
@@ -86,10 +87,14 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
+            if (order.Status.Equals("Требуются_материалы"))
+            {
+                return;
+            }
             if (!order.Status.Equals("Выполняется")) 
             {
                 throw new Exception($"Невозможно завершить заказ, т.к. он не имеет статуса {OrderStatus.Выполняется}");
-            }
+            }            
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,

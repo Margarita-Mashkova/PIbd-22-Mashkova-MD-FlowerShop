@@ -114,8 +114,8 @@ namespace FlowerShopDatabaseImplement.Implements
         {
             using var context = new FlowerShopDatabase();
             using var transaction = context.Database.BeginTransaction();
-            try
-            {
+            //try
+            //{
                 foreach (var fc in flowerComponents)
                 {
                     int requiredCount = fc.Value.Item2 * count;
@@ -128,17 +128,19 @@ namespace FlowerShopDatabaseImplement.Implements
                     }
                     if (requiredCount > 0)
                     {
-                        throw new Exception("На складах недостаточно компонентов");
+                        //throw new Exception("На складах недостаточно компонентов");
+                        transaction.Rollback();
+                        return false;
                     }
                 }
                 context.SaveChanges();
                 transaction.Commit();
-            }
-            catch
+            //}
+            /*catch
             {
                 transaction.Rollback();
-                throw;
-            }
+                //throw;
+            }*/
             return true;            
         }
         private Storehouse CreateModel(StorehouseBindingModel model, Storehouse storehouse, FlowerShopDatabase context)
