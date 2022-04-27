@@ -17,6 +17,11 @@ namespace FlowerShopDatabaseImplement
                 optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=FLowerShopDatabaseHard5;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
+        }        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>().Property(m => m.ImplementerId).IsRequired(false);
+            base.OnModelCreating(modelBuilder);
         }
         public virtual DbSet<Component> Components { set; get; }
         public virtual DbSet<Flower> Flowers { set; get; }
@@ -25,5 +30,6 @@ namespace FlowerShopDatabaseImplement
         public virtual DbSet<Storehouse> Storehouses { set; get; }
         public virtual DbSet<StorehouseComponent> StorehouseComponents { set; get; }
         public virtual DbSet<Client> Clients { set; get; }
+        public virtual DbSet<Implementer> Implementers { set; get; }
     }
 }

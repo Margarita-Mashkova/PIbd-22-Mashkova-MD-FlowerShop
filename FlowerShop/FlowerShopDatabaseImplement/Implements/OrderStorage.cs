@@ -19,6 +19,7 @@ namespace FlowerShopDatabaseImplement.Implements
             return context.Orders
                 .Include(rec => rec.Flower)
                 .Include(rec => rec.Client)
+                .Include(rec => rec.Implementer)
                 .ToList()
                 .Select(CreateModel)
                 .ToList();
@@ -33,10 +34,12 @@ namespace FlowerShopDatabaseImplement.Implements
             return context.Orders
             .Include(rec => rec.Flower)
             .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
             .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
             (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
-            .ToList()
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+            (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status) ||
+            (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status))
             .Select(CreateModel)
             .ToList();
         }
@@ -50,6 +53,7 @@ namespace FlowerShopDatabaseImplement.Implements
             var order = context.Orders
             .Include(rec => rec.Flower)
             .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
             .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
@@ -108,6 +112,7 @@ namespace FlowerShopDatabaseImplement.Implements
         {
             order.FlowerId = model.FlowerId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -124,6 +129,8 @@ namespace FlowerShopDatabaseImplement.Implements
                 ClientFIO = order.Client.ClientFIO,
                 FlowerId = order.FlowerId,
                 FlowerName = order.Flower.FlowerName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = order.Implementer?.ImplementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),

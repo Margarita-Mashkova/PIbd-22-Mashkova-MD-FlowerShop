@@ -104,6 +104,7 @@ namespace FlowerShopListImplement.Implements
         {
             order.FlowerId = model.FlowerId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = (int)model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -131,13 +132,24 @@ namespace FlowerShopListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = null;
+            foreach (Implementer implementer in source.Implementers)
+            {
+                if (order.ImplementerId == implementer.Id)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 ClientFIO = clientFIO,
                 FlowerName = flowerName,
+                ImplementerFIO = implementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),

@@ -65,8 +65,9 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
-                ClientId=order.ClientId,
+                ClientId = order.ClientId,
                 FlowerId = order.FlowerId,
+                ImplementerId = model.ImplementerId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
@@ -93,6 +94,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 Id = order.Id,
                 FlowerId = order.FlowerId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
@@ -118,7 +120,8 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
-                ClientId=order.ClientId,
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
