@@ -45,6 +45,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
+            OrderStatus status = OrderStatus.Выполняется;
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
                 Id = model.OrderId
@@ -60,7 +61,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             var flower = _flowerStorage.GetElement(new FlowerBindingModel { Id = order.FlowerId});
             if (!_storehouseStorage.CheckAvailability(order.Count, flower.FlowerComponents))
             {
-                throw new Exception("На складах недостаточно компонентов");
+                status = OrderStatus.Требуются_материалы;
             }
             _orderStorage.Update(new OrderBindingModel
             {
@@ -72,7 +73,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 Count = order.Count,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
+                Status = status
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
