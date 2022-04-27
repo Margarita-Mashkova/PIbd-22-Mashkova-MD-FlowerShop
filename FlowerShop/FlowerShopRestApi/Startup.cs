@@ -31,7 +31,7 @@ namespace FlowerShopRestApi
             services.AddTransient<IFlowerLogic, FlowerLogic>();
             services.AddTransient<IStorehouseLogic, StorehouseLogic>();
             services.AddTransient<IComponentLogic, ComponentLogic>();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
