@@ -82,13 +82,13 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Компонент не найден");
             }
-            if (storehouse.StorehouseComponents.ContainsKey(component.Id))
+            if (storehouse.StorehouseComponents.ContainsKey(model.ComponentId))
             {
-                storehouse.StorehouseComponents[component.Id] = (component.ComponentName, storehouse.StorehouseComponents[model.ComponentId].Item2 + model.Count);
+                storehouse.StorehouseComponents[model.ComponentId] = (component.ComponentName, storehouse.StorehouseComponents[model.ComponentId].Item2 + model.Count);
             }
             else
             {
-                storehouse.StorehouseComponents.Add(component.Id, (component.ComponentName, model.Count));
+                storehouse.StorehouseComponents.Add(model.ComponentId, (component.ComponentName, model.Count));
             }
             _storehouseStorage.Update(new StorehouseBindingModel
             {

@@ -57,14 +57,20 @@ namespace FlowerShopStorehouseApp.Controllers
             throw new Exception("Введите логин, пароль");
         }
 
-        [HttpPost]
-        public void Create(string storehouseName, string FIO)
+        [HttpGet]
+        public IActionResult Create()
         {
-            if (!string.IsNullOrEmpty(storehouseName) && !string.IsNullOrEmpty(FIO))
+            return View();
+        }
+
+        [HttpPost]
+        public void Create(string storehouseName, string responsibleFullName)
+        {
+            if (!string.IsNullOrEmpty(storehouseName) && !string.IsNullOrEmpty(responsibleFullName))
             {
                 APIStorehouse.PostRequest("api/storehouse/CreateOrUpdateStorehouse", new StorehouseBindingModel
                 {
-                    ResponsibleFullName = FIO,
+                    ResponsibleFullName = responsibleFullName,
                     StorehouseName = storehouseName,
                     DateCreate = DateTime.Now,
                     StorehouseComponents = new Dictionary<int, (string, int)>()
@@ -78,17 +84,14 @@ namespace FlowerShopStorehouseApp.Controllers
         [HttpGet]
         public IActionResult Update(int storehouseId)
         {
-            var storehouse = APIStorehouse.GetRequest<StorehouseViewModel>($"api/storehouse/GetStorehouse?storehouseId={storehouseId}");
-            ViewBag.StorehouseComponents = storehouse.StorehouseComponents.Values;
-            ViewBag.StorehouseName = storehouse.StorehouseName;
-            ViewBag.FIO = storehouse.ResponsibleFullName;
+            ViewBag.Storehouse = APIStorehouse.GetRequest<StorehouseViewModel>($"api/storehouse/GetStorehouse?storehouseId={storehouseId}");
             return View();
         }
 
         [HttpPost]
-        public void Update(int storehouseId, string storehouseName, string FIO)
+        public void Update(int storehouseId, string storehouseName, string responsibleFullName)
         {
-            if (!string.IsNullOrEmpty(storehouseName) && !string.IsNullOrEmpty(FIO))
+            if (!string.IsNullOrEmpty(storehouseName) && !string.IsNullOrEmpty(responsibleFullName))
             {
                 var storehouse = APIStorehouse.GetRequest<StorehouseViewModel>($"api/storehouse/GetStorehouse?storehouseId={storehouseId}");
                 if (storehouse == null)
@@ -97,11 +100,11 @@ namespace FlowerShopStorehouseApp.Controllers
                 }
                 APIStorehouse.PostRequest("api/storehouse/CreateOrUpdateStorehouse", new StorehouseBindingModel
                 {
-                    ResponsibleFullName = FIO,
+                    Id = storehouse.Id,
+                    ResponsibleFullName = responsibleFullName,
                     StorehouseName = storehouseName,
                     DateCreate = DateTime.Now,
-                    StorehouseComponents = storehouse.StorehouseComponents,
-                    Id = storehouse.Id
+                    StorehouseComponents = storehouse.StorehouseComponents                   
                 });
                 Response.Redirect("Index");
                 return;
