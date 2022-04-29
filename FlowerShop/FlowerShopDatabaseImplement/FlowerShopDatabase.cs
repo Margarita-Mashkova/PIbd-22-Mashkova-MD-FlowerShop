@@ -14,7 +14,7 @@ namespace FlowerShopDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=FLowerShopDatabaseHard;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=FLowerShopDatabaseHard5;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -24,6 +24,6 @@ namespace FlowerShopDatabaseImplement
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Storehouse> Storehouses { set; get; }
         public virtual DbSet<StorehouseComponent> StorehouseComponents { set; get; }
-
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

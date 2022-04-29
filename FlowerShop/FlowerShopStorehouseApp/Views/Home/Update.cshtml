@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Update";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение склада</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Название:</div>
+        <div class="col-8"><input type="text" name="StorehouseName" id="StorehouseName" value="@ViewBag.Storehouse.StorehouseName" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Ответственный:</div>
+        <div class="col-8"><input type="text" name="ResponsibleFullName" id="ResponsibleFullName" value="@ViewBag.Storehouse.ResponsibleFullName" /></div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Компонент
+                </th>
+                <th>
+                    Количество
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Storehouse.StorehouseComponents)
+            {
+                <tr>
+                    <td>
+                        @item.Value.Item1
+                    </td>
+                    <td>
+                        @item.Value.Item2
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
+        </div>
+    </div>
+</form>

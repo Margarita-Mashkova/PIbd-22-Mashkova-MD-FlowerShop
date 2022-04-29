@@ -20,9 +20,9 @@ namespace FlowerShopListImplement.Implements
         public List<FlowerViewModel> GetFullList()
         {
             var result = new List<FlowerViewModel>();
-            foreach (var component in source.Flowers)
+            foreach (var flower in source.Flowers)
             {
-                result.Add(CreateModel(component));
+                result.Add(CreateModel(flower));
             }
             return result;
         }

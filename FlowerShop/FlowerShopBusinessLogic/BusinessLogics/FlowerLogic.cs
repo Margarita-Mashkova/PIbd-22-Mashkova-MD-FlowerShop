@@ -31,9 +31,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         {
             var element = _flowerStorage.GetElement(new FlowerBindingModel
             {
-                FlowerName = model.FlowerName,
-                Price = model.Price,
-                FlowerComponents = model.FlowerComponents
+                FlowerName = model.FlowerName
             });
             if (element != null && element.Id != model.Id)
             {
