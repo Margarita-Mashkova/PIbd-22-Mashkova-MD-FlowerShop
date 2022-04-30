@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowerShopFileImplement.Models
+namespace FlowerShopListImplement.Models
 {
     public class MessageInfo
     {
@@ -14,5 +14,6 @@ namespace FlowerShopFileImplement.Models
         public DateTime DateDelivery { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

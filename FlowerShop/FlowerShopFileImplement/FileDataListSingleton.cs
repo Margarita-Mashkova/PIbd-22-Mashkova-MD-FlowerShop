@@ -177,6 +177,7 @@ namespace FlowerShopFileImplement
                     list.Add(new MessageInfo
                     {
                         MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         SenderName = elem.Element("SenderName").Value,
                         Subject = elem.Element("Subject").Value,
                         Body = elem.Element("Body").Value
@@ -293,6 +294,7 @@ namespace FlowerShopFileImplement
                 {
                     xElement.Add(new XElement("MessageInfo",
                     new XAttribute("MessageId", messageInfo.MessageId),
+                    new XElement("ClientId", messageInfo.ClientId),
                     new XElement("SenderName", messageInfo.SenderName),
                     new XElement("DateDelivery", messageInfo.DateDelivery.ToString()),
                     new XElement("Subject", messageInfo.Subject),
