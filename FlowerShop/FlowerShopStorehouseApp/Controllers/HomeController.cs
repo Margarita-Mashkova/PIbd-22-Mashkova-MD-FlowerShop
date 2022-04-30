@@ -126,10 +126,8 @@ namespace FlowerShopStorehouseApp.Controllers
         [HttpPost]
         public void Delete(int storehouseId)
         {
-            APIStorehouse.PostRequest("api/storehouse/DeleteStorehouse", new StorehouseBindingModel
-            {
-                Id = storehouseId
-            });
+            var storehouse = APIStorehouse.GetRequest<StorehouseViewModel>($"api/storehouse/GetStorehouse?storehouseId={storehouseId}");
+            APIStorehouse.PostRequest("api/storehouse/DeleteStorehouse", storehouse);
             Response.Redirect("Index");
         }
 

@@ -255,7 +255,7 @@ namespace FlowerShopFileImplement
                 xDocument.Save(FlowerFileName);
             }
         }
-        private void SaveStorehouses()
+       private void SaveStorehouses()
         {
             if (Storehouses != null)
             {
