@@ -13,6 +13,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         private readonly IOrderStorage _orderStorage;
         private readonly IStorehouseStorage _storehouseStorage;
         private readonly IFlowerStorage _flowerStorage;
+        private readonly object locker = new object();
         public OrderLogic(IOrderStorage orderStorage, IStorehouseStorage storehouseStorage, IFlowerStorage flowerStorage)
         {
             _orderStorage = orderStorage;
@@ -45,34 +46,40 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel
+            lock (locker)
             {
-                Id = model.OrderId
-            });
-            if (order == null)
-            {
-                throw new Exception("Заказ не найден");
+                OrderStatus status = OrderStatus.Выполняется;
+                var order = _orderStorage.GetElement(new OrderBindingModel
+                {
+                    Id = model.OrderId
+                });
+                if (order == null)
+                {
+                    throw new Exception("Заказ не найден");
+                }
+                if (!order.Status.Equals("Принят") && !order.Status.Equals("Требуются_материалы"))
+                {
+                    throw new Exception($"Невозможно обработать заказ, т.к. он не имеет статуса {OrderStatus.Принят} или {OrderStatus.Требуются_материалы}");
+                }
+                var flower = _flowerStorage.GetElement(new FlowerBindingModel { Id = order.FlowerId });
+                if (!_storehouseStorage.CheckAvailability(order.Count, flower.FlowerComponents))
+                {
+                    status = OrderStatus.Требуются_материалы;
+                    model.ImplementerId = null;
+                }
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    ClientId = order.ClientId,
+                    FlowerId = order.FlowerId,
+                    ImplementerId = model.ImplementerId,
+                    Sum = order.Sum,
+                    Count = order.Count,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = status
+                });
             }
-            if (!order.Status.Equals("Принят"))
-            {
-                throw new Exception($"Невозможно обработать заказ, т.к. он не имеет статуса {OrderStatus.Принят}");
-            }
-            var flower = _flowerStorage.GetElement(new FlowerBindingModel { Id = order.FlowerId});
-            if (!_storehouseStorage.CheckAvailability(order.Count, flower.FlowerComponents))
-            {
-                throw new Exception("На складах недостаточно компонентов");
-            }
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                ClientId=order.ClientId,
-                FlowerId = order.FlowerId,
-                Sum = order.Sum,
-                Count = order.Count,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
@@ -84,15 +91,20 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
+            if (order.Status.Equals("Требуются_материалы"))
+            {
+                return;
+            }
             if (!order.Status.Equals("Выполняется")) 
             {
                 throw new Exception($"Невозможно завершить заказ, т.к. он не имеет статуса {OrderStatus.Выполняется}");
-            }
+            }            
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,
@@ -118,7 +130,8 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 FlowerId = order.FlowerId,
-                ClientId=order.ClientId,
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Sum = order.Sum,
                 Count = order.Count,
                 DateCreate = order.DateCreate,

@@ -76,7 +76,6 @@ namespace FlowerShopBusinessLogic.OfficePackage.Implements
             }
             return null;
         }
-        //TODO: починить FontSize
         private static TableProperties CreateTableProperties(WordTableProperties wordTableProperties)
         {
             if (wordTableProperties != null)

@@ -114,32 +114,25 @@ namespace FlowerShopDatabaseImplement.Implements
         {
             using var context = new FlowerShopDatabase();
             using var transaction = context.Database.BeginTransaction();
-            try
+            foreach (var fc in flowerComponents)
             {
-                foreach (var fc in flowerComponents)
+                int requiredCount = fc.Value.Item2 * count;
+                foreach (var storehouse in context.Storehouses.Include(rec => rec.StorehouseComponents))
                 {
-                    int requiredCount = fc.Value.Item2 * count;
-                    foreach (var storehouse in context.Storehouses.Include(rec => rec.StorehouseComponents))
-                    {
-                        int? availableCount = storehouse.StorehouseComponents.FirstOrDefault(rec => rec.ComponentId == fc.Key)?.Count;
-                        if (availableCount == null) { continue; }
-                        requiredCount -= (int)availableCount;
-                        storehouse.StorehouseComponents.FirstOrDefault(rec => rec.ComponentId == fc.Key).Count = (requiredCount < 0) ? (int)availableCount - ((int)availableCount + requiredCount) : 0;
-                    }
-                    if (requiredCount > 0)
-                    {
-                        throw new Exception("На складах недостаточно компонентов");
-                    }
+                    int? availableCount = storehouse.StorehouseComponents.FirstOrDefault(rec => rec.ComponentId == fc.Key)?.Count;
+                    if (availableCount == null) { continue; }
+                    requiredCount -= (int)availableCount;
+                    storehouse.StorehouseComponents.FirstOrDefault(rec => rec.ComponentId == fc.Key).Count = (requiredCount < 0) ? (int)availableCount - ((int)availableCount + requiredCount) : 0;
                 }
-                context.SaveChanges();
-                transaction.Commit();
+                if (requiredCount > 0)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
             }
-            catch
-            {
-                transaction.Rollback();
-                throw;
-            }
-            return true;            
+            context.SaveChanges();
+            transaction.Commit();
+            return true;
         }
         private Storehouse CreateModel(StorehouseBindingModel model, Storehouse storehouse, FlowerShopDatabase context)
         {
