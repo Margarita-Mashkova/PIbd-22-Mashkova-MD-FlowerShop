@@ -25,12 +25,13 @@ namespace FlowerShopView
         {
             LoadData();
         }
+        //TODO: доделать вывод компонентов
         private void LoadData()
         {
             try
             {
-                Program.ConfigGrid(_logic.Read(null), dataGridView);
-                /*var list = _logic.Read(null);
+                var list = _logic.Read(null);
+                Program.ConfigGrid(list, dataGridView);                
                 if (list != null)
                 {
                     dataGridView.Rows.Clear();
@@ -43,7 +44,7 @@ namespace FlowerShopView
                         }
                         dataGridView.Rows.Add(new object[] { flower.Id, flower.FlowerName, flower.Price, strComponents });
                     }
-                }*/
+                }
             }
             catch (Exception ex)
             {

@@ -10,19 +10,16 @@ namespace FlowerShopConracts.ViewModels
 {
     public class ClientViewModel
     {
-        [Column(title: "Номер", width: 100)]
+        [Column(title: "Номер", width: 80)]
         public int Id { get; set; }
 
-        [Column(title: "ФИО", width: 150)]
-        //[DisplayName("ФИО")]
+        [Column(title: "ФИО", gridViewAutoSize:GridViewAutoSize.Fill)]
         public string ClientFIO { get; set; }
 
-        [Column(title: "Логин", width: 150)]
-        //[DisplayName("Логин")]
+        [Column(title: "Логин", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Email { get; set; }
 
-        [Column(title: "Пароль", width: 150)]
-        //[DisplayName("Пароль")]
+        [Column(title: "Пароль", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Password { get; set; }
     }
 }

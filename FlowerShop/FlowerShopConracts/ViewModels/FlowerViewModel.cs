@@ -11,15 +11,13 @@ namespace FlowerShopConracts.ViewModels
     /// Букет, собираемый в цветочной лавке
     public class FlowerViewModel
     {
-        [Column(title: "Номер", width: 100)]
+        [Column(title: "Номер", width: 80)]
         public int Id { get; set; }
 
-        [Column(title: "Название букета", gridViewAutoSize: GridViewAutoSize.Fill)]
-        //[DisplayName("Название букета")]
+        [Column(title: "Название букета", width: 180)]
         public string FlowerName { get; set; }
 
-        [Column(title: "Цена", width: 100)]
-        //[DisplayName("Цена")]
+        [Column(title: "Цена", width: 60)]
         public decimal Price { get; set; }
 
         [Column(title: "Компоненты", gridViewAutoSize: GridViewAutoSize.Fill)]

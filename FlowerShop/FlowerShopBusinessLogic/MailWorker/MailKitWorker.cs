@@ -43,7 +43,6 @@ namespace FlowerShopBusinessLogic.MailWorker
                 throw;
             }
         }
-        //TODO: clientId
         protected override async Task<List<MessageInfoBindingModel>> ReceiveMailAsync()
         {
             var list = new List<MessageInfoBindingModel>();
