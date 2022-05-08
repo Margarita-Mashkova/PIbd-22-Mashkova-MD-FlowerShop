@@ -29,7 +29,8 @@ namespace FlowerShopView
         {
             try
             {
-                var list = _logic.Read(null);
+                Program.ConfigGrid(_logic.Read(null), dataGridView);
+                /*var list = _logic.Read(null);
                 if (list != null)
                 {
                     dataGridView.Rows.Clear();
@@ -42,7 +43,7 @@ namespace FlowerShopView
                         }
                         dataGridView.Rows.Add(new object[] { flower.Id, flower.FlowerName, flower.Price, strComponents });
                     }
-                }
+                }*/
             }
             catch (Exception ex)
             {

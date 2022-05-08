@@ -4,20 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using FlowerShopConracts.Attributes;
 
 namespace FlowerShopConracts.ViewModels
 {
     public class ClientViewModel
     {
+        [Column(title: "Номер", width: 100)]
         public int Id { get; set; }
-        
-        [DisplayName("ФИО")]
+
+        [Column(title: "ФИО", width: 150)]
+        //[DisplayName("ФИО")]
         public string ClientFIO { get; set; }
 
-        [DisplayName("Логин")]
+        [Column(title: "Логин", width: 150)]
+        //[DisplayName("Логин")]
         public string Email { get; set; }
 
-        [DisplayName("Пароль")]
+        [Column(title: "Пароль", width: 150)]
+        //[DisplayName("Пароль")]
         public string Password { get; set; }
     }
 }

@@ -5,39 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using FlowerShopConracts.Enums;
+using FlowerShopConracts.Attributes;
 
 namespace FlowerShopConracts.ViewModels
 {
     /// Заказ
     public class OrderViewModel
     {
+        [Column(title: "Номер", width: 100)]
         public int Id { get; set; }
         public int FlowerId { get; set; }
         public int ClientId { get; set; }
         public int? ImplementerId { get; set; }
-        
-        [DisplayName("Клиент")]
+
+        [Column(title: "Клиент", width: 150)]
+        //[DisplayName("Клиент")]
         public string ClientFIO { get; set; }
 
-        [DisplayName("Букет")]
+        [Column(title: "Букет", gridViewAutoSize: GridViewAutoSize.Fill)]
+        //[DisplayName("Букет")]
         public string FlowerName { get; set; }
 
-        [DisplayName("Количество")]
+        [Column(title: "Количество", width: 100)]
+        //[DisplayName("Количество")]
         public int Count { get; set; }
-        
-        [DisplayName("Сумма")]
+
+        [Column(title: "Сумма", width: 50)]
+        //[DisplayName("Сумма")]
         public decimal Sum { get; set; }
 
-        [DisplayName("Исполнитель")]
+        [Column(title: "Исполнитель", width: 150)]
+        //[DisplayName("Исполнитель")]
         public string ImplementerFIO { get; set; }
 
-        [DisplayName("Статус")]
+        [Column(title: "Статус", width: 100)]
+        //[DisplayName("Статус")]
         public string Status { get; set; }
 
-        [DisplayName("Дата создания")]
+        [Column(title: "Дата создания", width: 100)]
+        //[DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
-        
-        [DisplayName("Дата выполнения")]
+
+        [Column(title: "Дата выполнения", width: 100)]
+        //[DisplayName("Дата выполнения")]
         public DateTime? DateImplement { get; set; }
     }
 }
