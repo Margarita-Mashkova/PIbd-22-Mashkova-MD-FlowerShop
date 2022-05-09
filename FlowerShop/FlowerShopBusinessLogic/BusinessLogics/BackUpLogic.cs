@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FlowerShopBusinessLogic.BusinessLogics
 {
@@ -45,7 +46,7 @@ namespace FlowerShopBusinessLogic.BusinessLogics
                 // вытаскиваем список классов для сохранения
                 var dbsets = _backUpInfo.GetFullList();
                 // берем метод для сохранения (из базового абстрактного класса)
-                MethodInfo method = GetType().BaseType.GetTypeInfo().GetDeclaredMethod("SaveToFile");
+                MethodInfo method = GetType().GetTypeInfo().GetDeclaredMethod("SaveToFile");
                 foreach (var set in dbsets)
                 {
                     // создаем объект из класса для сохранения
@@ -70,9 +71,27 @@ namespace FlowerShopBusinessLogic.BusinessLogics
         {
             var records = _backUpInfo.GetList<T>();
             var obj = new T();
-            var jsonFormatter = new DataContractJsonSerializer(typeof(List<T>));
+            /*var jsonFormatter = new DataContractJsonSerializer(typeof(List<T>));
             using var fs = new FileStream(string.Format("{0}/{1}.json", folderName, obj.GetType().Name), FileMode.OpenOrCreate);
-            jsonFormatter.WriteObject(fs, records);
+            jsonFormatter.WriteObject(fs, records);*/
+            var typeName = obj.GetType().Name;
+            if (records != null)
+            {
+                var root = new XElement($"{typeName}s");
+                foreach (var record in records)
+                {
+                    var elem = new XElement(typeName);
+                    foreach (var member in obj.GetType().GetMembers()
+                        .Where(rec => rec.MemberType != MemberTypes.Method 
+                        && rec.MemberType != MemberTypes.Constructor && !rec.ToString().Contains(".Models.")))
+                    {
+                        elem.Add(new XElement(member.Name, record.GetType().GetProperty(member.Name)?.GetValue(record) ?? "null"));
+                    }
+                    root.Add(elem);
+                }
+                XDocument xDocument = new XDocument(root);
+                xDocument.Save(string.Format("{0}/{1}.xml", folderName, typeName));
+            }
         }
     }
 }
