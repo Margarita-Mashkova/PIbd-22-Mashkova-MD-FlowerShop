@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace FlowerShopBusinessLogic.BusinessLogics
 {
@@ -74,24 +74,9 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             /*var jsonFormatter = new DataContractJsonSerializer(typeof(List<T>));
             using var fs = new FileStream(string.Format("{0}/{1}.json", folderName, obj.GetType().Name), FileMode.OpenOrCreate);
             jsonFormatter.WriteObject(fs, records);*/
-            var typeName = obj.GetType().Name;
-            if (records != null)
-            {
-                var root = new XElement($"{typeName}s");
-                foreach (var record in records)
-                {
-                    var elem = new XElement(typeName);
-                    foreach (var member in obj.GetType().GetMembers()
-                        .Where(rec => rec.MemberType != MemberTypes.Method 
-                        && rec.MemberType != MemberTypes.Constructor && !rec.ToString().Contains(".Models.")))
-                    {
-                        elem.Add(new XElement(member.Name, record.GetType().GetProperty(member.Name)?.GetValue(record) ?? "null"));
-                    }
-                    root.Add(elem);
-                }
-                XDocument xDocument = new XDocument(root);
-                xDocument.Save(string.Format("{0}/{1}.xml", folderName, typeName));
-            }
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+            using var fs = new FileStream(string.Format("{0}/{1}.xml", folderName, obj.GetType().Name), FileMode.OpenOrCreate);
+            serializer.Serialize(fs, records);
         }
     }
 }
