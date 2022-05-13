@@ -44,7 +44,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Component", b =>
@@ -61,7 +61,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Components");
+                    b.ToTable("Components", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Flower", b =>
@@ -81,7 +81,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Flowers");
+                    b.ToTable("Flowers", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.FlowerComponent", b =>
@@ -107,7 +107,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasIndex("FlowerId");
 
-                    b.ToTable("FlowerComponents");
+                    b.ToTable("FlowerComponents", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Implementer", b =>
@@ -130,7 +130,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Implementers");
+                    b.ToTable("Implementers", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.MessageInfo", b =>
@@ -160,7 +160,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("MessagesInfo");
+                    b.ToTable("MessagesInfo", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Order", b =>
@@ -203,57 +203,7 @@ namespace FlowerShopDatabaseImplement.Migrations
 
                     b.HasIndex("ImplementerId");
 
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Storehouse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ResponsibleFullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StorehouseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Storehouses");
-                });
-
-            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.StorehouseComponent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StorehouseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ComponentId");
-
-                    b.HasIndex("StorehouseId");
-
-                    b.ToTable("StorehouseComponents");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.FlowerComponent", b =>
@@ -309,25 +259,6 @@ namespace FlowerShopDatabaseImplement.Migrations
                     b.Navigation("Implementer");
                 });
 
-            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.StorehouseComponent", b =>
-                {
-                    b.HasOne("FlowerShopDatabaseImplement.Models.Component", "Component")
-                        .WithMany("StorehouseComponents")
-                        .HasForeignKey("ComponentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FlowerShopDatabaseImplement.Models.Storehouse", "Storehouse")
-                        .WithMany("StorehouseComponents")
-                        .HasForeignKey("StorehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Component");
-
-                    b.Navigation("Storehouse");
-                });
-
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Client", b =>
                 {
                     b.Navigation("MessagesInfo");
@@ -338,8 +269,6 @@ namespace FlowerShopDatabaseImplement.Migrations
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("FlowerComponents");
-
-                    b.Navigation("StorehouseComponents");
                 });
 
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Flower", b =>
@@ -352,11 +281,6 @@ namespace FlowerShopDatabaseImplement.Migrations
             modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Implementer", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("FlowerShopDatabaseImplement.Models.Storehouse", b =>
-                {
-                    b.Navigation("StorehouseComponents");
                 });
 #pragma warning restore 612, 618
         }
