@@ -1,4 +1,6 @@
 ﻿using FlowerShopBusinessLogic.BusinessLogics;
+using FlowerShopBusinessLogic.MailWorker;
+using FlowerShopConracts.BindingModels;
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.StoragesContracts;
 using FlowerShopDatabaseImplement.Implements;
@@ -26,11 +28,14 @@ namespace FlowerShopRestApi
             services.AddTransient<IFlowerStorage, FlowerStorage>();
             services.AddTransient<IStorehouseStorage, StorehouseStorage>();
             services.AddTransient<IComponentStorage, ComponentStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IFlowerLogic, FlowerLogic>();
             services.AddTransient<IStorehouseLogic, StorehouseLogic>();
-            services.AddTransient<IComponentLogic, ComponentLogic>();
+            services.AddTransient<IComponentLogic, ComponentLogic>();            
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
@@ -57,6 +62,17 @@ namespace FlowerShopRestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?.GetSection("MailLogin")?.Value.ToString(),
+                MailPassword = Configuration?.GetSection("MailPassword")?.Value.ToString(),
+                SmtpClientHost = Configuration?.GetSection("SmtpClientHost")?.Value.ToString(),
+                SmtpClientPort = Convert.ToInt32(Configuration?.GetSection("SmtpClientPort")?.Value.ToString()),
+                PopHost = Configuration?.GetSection("PopHost")?.Value.ToString(),
+                PopPort = Convert.ToInt32(Configuration?.GetSection("PopPort")?.Value.ToString())
             });
         }
     }

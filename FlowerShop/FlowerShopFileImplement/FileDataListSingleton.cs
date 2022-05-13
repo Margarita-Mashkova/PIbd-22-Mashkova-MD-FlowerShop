@@ -19,11 +19,13 @@ namespace FlowerShopFileImplement
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
         private readonly string StorehouseFileName = "Storehouse.xml";
+        private readonly string MessageInfoFileName = "MessageInfo.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Flower> Flowers { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> MessagesInfo { get; set; }
         public List<Storehouse> Storehouses { get; set; }
         private FileDataListSingleton()
         {
@@ -33,6 +35,7 @@ namespace FlowerShopFileImplement
             Clients = LoadClients();
             Implementers = LoadImplementers();
             Storehouses = LoadStorehouses();
+            MessagesInfo = LoadMessagesInfo();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -41,14 +44,15 @@ namespace FlowerShopFileImplement
                 instance = new FileDataListSingleton();
             }
             return instance;
-        }        
-        public static void SaveData() 
+        }
+        public static void SaveData()
         {
             instance.SaveComponents();
             instance.SaveOrders();
             instance.SaveFlowers();
             instance.SaveClients();
             instance.SaveImplementers();
+            instance.SaveMessagesInfo();
             instance.SaveStorehouses();
         }
         private List<Component> LoadComponents()
@@ -72,11 +76,11 @@ namespace FlowerShopFileImplement
         private List<Order> LoadOrders()
         {
             var list = new List<Order>();
-            if (File.Exists(OrderFileName)) 
+            if (File.Exists(OrderFileName))
             {
                 var xDocument = XDocument.Load(OrderFileName);
                 var xElements = xDocument.Root.Elements("Order").ToList();
-                foreach (var elem in xElements) 
+                foreach (var elem in xElements)
                 {
                     list.Add(new Order
                     {
@@ -154,7 +158,7 @@ namespace FlowerShopFileImplement
             }
             return list;
         }
-        private List<Client> LoadClients() 
+        private List<Client> LoadClients()
         {
             var list = new List<Client>();
             if (File.Exists(ClientFileName))
@@ -194,6 +198,31 @@ namespace FlowerShopFileImplement
             }
             return list;
         }
+        public List<MessageInfo> LoadMessagesInfo()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageInfoFileName))
+            {
+                var xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value
+                    });
+                    if (elem.Element("DateDelivery").Value != "")
+                    {
+                        list.Last().DateDelivery = DateTime.ParseExact(elem.Element("DateDelivery").Value, "d.M.yyyy H:m:s", null);
+                    }
+                }
+            }
+            return list;
+        }
         private void SaveComponents()
         {
             if (Components != null)
@@ -205,7 +234,7 @@ namespace FlowerShopFileImplement
                     new XAttribute("Id", component.Id),
                     new XElement("ComponentName", component.ComponentName)));
                 }
-                var xDocument = new XDocument(xElement); 
+                var xDocument = new XDocument(xElement);
                 xDocument.Save(ComponentFileName);
             }
         }
@@ -312,7 +341,26 @@ namespace FlowerShopFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(ImplementerFileName);
-            }            
+            }
+        }
+        private void SaveMessagesInfo()
+        {
+            if (MessagesInfo != null)
+            {
+                var xElement = new XElement("MessagesInfo");
+                foreach (var messageInfo in MessagesInfo)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("MessageId", messageInfo.MessageId),
+                    new XElement("ClientId", messageInfo.ClientId),
+                    new XElement("SenderName", messageInfo.SenderName),
+                    new XElement("DateDelivery", messageInfo.DateDelivery.ToString()),
+                    new XElement("Subject", messageInfo.Subject),
+                    new XElement("Body", messageInfo.Body)));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(OrderFileName);
+            }
         }
     }
 }
