@@ -33,17 +33,7 @@ namespace FlowerShopView
         {
             try
             {
-                var list = _messageInfoLogic.Read(null).Skip(countOnPage * (currentPage - 1)).Take(countOnPage).ToList();
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[1].ReadOnly = true;
-                }
-                textBoxPageNumber.Text = currentPage.ToString();
+                Program.ConfigGrid(_messageInfoLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {

@@ -50,6 +50,7 @@ namespace FlowerShopView
                 flowerComponents = new Dictionary<int, (string, int)>();
             }
         }
+        //TODO: доделать вывод
         private void LoadData()
         {
             try

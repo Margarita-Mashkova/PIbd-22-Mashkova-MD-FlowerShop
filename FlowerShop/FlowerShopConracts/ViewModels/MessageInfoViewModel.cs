@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowerShopConracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,18 +16,18 @@ namespace FlowerShopConracts.ViewModels
         [DisplayName("Статус")]
         public bool IsRead { get; set; }
 
-        [DisplayName("Отправитель")]
+        [Column(title: "Отправитель", width: 195)]
         public string SenderName { get; set; }
 
-        [DisplayName("Дата письма")]
+        [Column(title: "Дата письма", width: 120)]
         public DateTime DateDelivery { get; set; }
 
-        [DisplayName("Заголовок")]
+        [Column(title: "Заголовок", width: 210)]
         public string Subject { get; set; }
 
-        [DisplayName("Текст")]
-        public string Body { get; set; }        
-
+        [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.Fill)]
+        public string Body { get; set; }
+    
         [DisplayName("Ответ")]
         public string Reply { get; set; }
     }
