@@ -46,5 +46,10 @@
                 }
             </tbody>
         </table>
+         <form>
+            <button asp-action="PrevMailsPage" class="btn btn-primary">Назад</button>
+            <input type="text" name="pageNumber" value="@ViewBag.PageNumber" size="5" />
+            <button asp-action="NextMailsPage" class="btn btn-primary">Вперёд</button>
+        </form>
     }
 </div>

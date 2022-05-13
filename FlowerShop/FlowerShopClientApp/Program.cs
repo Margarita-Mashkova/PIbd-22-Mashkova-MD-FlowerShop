@@ -7,6 +7,7 @@ namespace FlowerShopClientApp
     public class Program
     {
         public static ClientViewModel Client { get; set; }
+        public static int currentPageOnMails;
 
         public static void Main(string[] args)
         {

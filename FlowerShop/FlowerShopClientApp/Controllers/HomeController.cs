@@ -12,7 +12,7 @@ namespace FlowerShopClientApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        int countOnPage = 3;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -141,10 +141,35 @@ namespace FlowerShopClientApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult MessageInfo()
+        public IActionResult MessageInfo(int pageNumber)
         {
-            ViewBag.MessagesInfo = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}");
+            ViewBag.MessagesInfo = APIClient.GetRequest<List<MessageInfoViewModel>>
+                ($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}")
+                .Skip(countOnPage * Program.currentPageOnMails).Take(countOnPage).ToList();
+            ViewBag.PageNumber = pageNumber + 1;
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult NextMailsPage()
+        {
+            int messagesCount = APIClient.GetRequest<List<MessageInfoViewModel>>
+                ($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}").Count;
+            if ((countOnPage * (Program.currentPageOnMails + 1)) < messagesCount)
+            {
+                Program.currentPageOnMails++;
+            }
+            return Redirect($"~/Home/MessageInfo?pageNumber={Program.currentPageOnMails}");
+        }
+
+        [HttpGet]
+        public IActionResult PrevMailsPage()
+        {
+            if (Program.currentPageOnMails > 0)
+            {
+                Program.currentPageOnMails--;
+            }
+            return Redirect($"~/Home/MessageInfo?pageNumber={Program.currentPageOnMails}");
         }
     }
 }
