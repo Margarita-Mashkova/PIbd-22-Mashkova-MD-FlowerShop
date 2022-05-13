@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using FlowerShopConracts.BindingModels;
 using FlowerShopConracts.BusinessLogicsContracts;
 using FlowerShopConracts.ViewModels;
+using Unity;
 
 namespace FlowerShopView
 {
@@ -37,7 +38,10 @@ namespace FlowerShopView
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[1].ReadOnly = true;
                 }
                 textBoxPageNumber.Text = currentPage.ToString();
             }
@@ -71,6 +75,23 @@ namespace FlowerShopView
             if (textBoxPageNumber.Text != "")
             {
                 currentPage = Convert.ToInt32(textBoxPageNumber.Text);
+                LoadData();
+            }
+        }
+
+        private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                string id = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                var form = Program.Container.Resolve<FormMessageInfo>();
+                form.MessageId = id;
+                /*_messageInfoLogic.CreateOrUpdate(new MessageInfoBindingModel
+                {
+                    MessageId = id,
+                    IsRead = true
+                });*/
+                form.ShowDialog();
                 LoadData();
             }
         }

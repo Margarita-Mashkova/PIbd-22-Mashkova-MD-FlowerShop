@@ -45,6 +45,7 @@
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(1403, 102);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
             // 
             // buttonBack
             // 

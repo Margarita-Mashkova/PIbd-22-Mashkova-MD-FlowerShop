@@ -41,6 +41,15 @@ namespace FlowerShopFileImplement.Implements
             }
             source.MessagesInfo.Add(CreateModel(model, element));
         }
+        public void Update(MessageInfoBindingModel model)
+        {
+            MessageInfo element = source.MessagesInfo.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+            if (element == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            CreateModel(model, element);
+        }
         private static MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo messageInfo)
         {
             messageInfo.MessageId = model.MessageId;
@@ -49,6 +58,8 @@ namespace FlowerShopFileImplement.Implements
             messageInfo.DateDelivery = model.DateDelivery;
             messageInfo.Subject = model.Subject;
             messageInfo.Body = model.Body;
+            messageInfo.IsRead = model.IsRead;
+            messageInfo.Reply = model.Reply;
             return messageInfo;
         }
         private MessageInfoViewModel CreateModel(MessageInfo messageInfo)
@@ -59,7 +70,9 @@ namespace FlowerShopFileImplement.Implements
                 SenderName = messageInfo.SenderName,
                 DateDelivery = messageInfo.DateDelivery,
                 Subject = messageInfo.Subject,
-                Body = messageInfo.Body
+                Body = messageInfo.Body,
+                Reply = messageInfo.Reply,
+                IsRead = messageInfo.IsRead
             };
         }
     }

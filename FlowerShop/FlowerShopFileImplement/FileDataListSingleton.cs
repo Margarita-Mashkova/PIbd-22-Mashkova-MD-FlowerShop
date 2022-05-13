@@ -213,7 +213,9 @@ namespace FlowerShopFileImplement
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         SenderName = elem.Element("SenderName").Value,
                         Subject = elem.Element("Subject").Value,
-                        Body = elem.Element("Body").Value
+                        Body = elem.Element("Body").Value,
+                        IsRead = Convert.ToBoolean(elem.Element("IsRead").Value),
+                        Reply = elem.Element("Reply").Value
                     });
                     if (elem.Element("DateDelivery").Value != "")
                     {
@@ -356,7 +358,9 @@ namespace FlowerShopFileImplement
                     new XElement("SenderName", messageInfo.SenderName),
                     new XElement("DateDelivery", messageInfo.DateDelivery.ToString()),
                     new XElement("Subject", messageInfo.Subject),
-                    new XElement("Body", messageInfo.Body)));
+                    new XElement("Body", messageInfo.Body)),
+                    new XElement("IsRead", messageInfo.IsRead),
+                    new XElement("Reply", messageInfo.Reply));
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(OrderFileName);

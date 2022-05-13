@@ -16,14 +16,7 @@ namespace FlowerShopDatabaseImplement.Implements
         {
             using var context = new FlowerShopDatabase();
             return context.MessagesInfo
-            .Select(rec => new MessageInfoViewModel
-            {
-                MessageId = rec.MessageId,
-                SenderName = rec.SenderName,
-                DateDelivery = rec.DateDelivery,
-                Subject = rec.Subject,
-                Body = rec.Body
-            })
+            .Select(CreateModel)
             .ToList();
         }
         public List<MessageInfoViewModel> GetFilteredList(MessageInfoBindingModel model)
@@ -36,14 +29,7 @@ namespace FlowerShopDatabaseImplement.Implements
             return context.MessagesInfo
             .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
             (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
-            .Select(rec => new MessageInfoViewModel
-            {
-                MessageId = rec.MessageId,
-                SenderName = rec.SenderName,
-                DateDelivery = rec.DateDelivery,
-                Subject = rec.Subject,
-                Body = rec.Body
-            })
+            .Select(CreateModel)
             .ToList();
         }
         public void Insert(MessageInfoBindingModel model)
@@ -61,9 +47,49 @@ namespace FlowerShopDatabaseImplement.Implements
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
-                Body = model.Body
+                Body = model.Body,
+                IsRead = false
             });
             context.SaveChanges();
+        }
+        //TODO: check saving
+        public void Update(MessageInfoBindingModel model)
+        {
+            using var context = new FlowerShopDatabase();
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                var element = context.MessagesInfo.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                element.IsRead = true;
+                if (!string.IsNullOrEmpty(model.Reply))
+                {
+                    element.Reply = model.Reply;
+                }
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
+        private MessageInfoViewModel CreateModel(MessageInfo message)
+        {
+            return new MessageInfoViewModel
+            {
+                MessageId = message.MessageId,
+                SenderName = message.SenderName,
+                DateDelivery = message.DateDelivery,
+                Subject = message.Subject,
+                Body = message.Body,
+                IsRead = message.IsRead,
+                Reply = message.Reply
+            };
         }
     }
 }
