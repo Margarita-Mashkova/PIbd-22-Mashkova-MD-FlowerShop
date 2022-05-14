@@ -12,6 +12,7 @@ namespace FlowerShopDatabaseImplement.Implements
 {
     public class MessageInfoStorage : IMessageInfoStorage
     {
+        private readonly int stringsOnPage = 3;
         public List<MessageInfoViewModel> GetFullList()
         {
             using var context = new FlowerShopDatabase();
@@ -26,11 +27,17 @@ namespace FlowerShopDatabaseImplement.Implements
                 return null;
             }
             using var context = new FlowerShopDatabase();
-            return context.MessagesInfo
+            var messages = context.MessagesInfo
             .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
-            (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
-            .Select(CreateModel)
-            .ToList();
+            (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date) ||
+            (!model.ClientId.HasValue && model.PageNumber.HasValue) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId && model.PageNumber.HasValue));
+
+            if (model.PageNumber.HasValue)
+            {
+                messages = messages.Skip(stringsOnPage * (model.PageNumber.Value - 1)).Take(stringsOnPage);
+            }
+            return messages.Select(CreateModel).ToList();
         }
         public void Insert(MessageInfoBindingModel model)
         {
@@ -52,7 +59,6 @@ namespace FlowerShopDatabaseImplement.Implements
             });
             context.SaveChanges();
         }
-        //TODO: check saving
         public void Update(MessageInfoBindingModel model)
         {
             using var context = new FlowerShopDatabase();
