@@ -33,7 +33,7 @@ namespace FlowerShopView
         {
             try
             {
-                Program.ConfigGrid(_messageInfoLogic.Read(null), dataGridView);
+                Program.ConfigGrid(_messageInfoLogic.Read(null).Skip(countOnPage * (currentPage - 1)).Take(countOnPage).ToList(), dataGridView);
             }
             catch (Exception ex)
             {
@@ -74,15 +74,13 @@ namespace FlowerShopView
             if (dataGridView.SelectedRows.Count == 1)
             {
                 string id = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
-                var form = Program.Container.Resolve<FormMessageInfo>();
-                form.MessageId = id;
-                /*_messageInfoLogic.CreateOrUpdate(new MessageInfoBindingModel
+                if (id != null)
                 {
-                    MessageId = id,
-                    IsRead = true
-                });*/
-                form.ShowDialog();
-                LoadData();
+                    var form = Program.Container.Resolve<FormMessageInfo>();
+                    form.MessageId = id;
+                    form.ShowDialog();
+                    LoadData();
+                }
             }
         }
     }

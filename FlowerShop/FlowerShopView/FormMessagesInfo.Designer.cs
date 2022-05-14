@@ -43,13 +43,13 @@
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(1403, 102);
+            this.dataGridView.Size = new System.Drawing.Size(1403, 134);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(1139, 137);
+            this.buttonBack.Location = new System.Drawing.Point(1139, 165);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(122, 35);
             this.buttonBack.TabIndex = 2;
@@ -59,7 +59,7 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(1284, 137);
+            this.buttonNext.Location = new System.Drawing.Point(1284, 165);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(122, 35);
             this.buttonNext.TabIndex = 3;
@@ -69,7 +69,7 @@
             // 
             // textBoxPageNumber
             // 
-            this.textBoxPageNumber.Location = new System.Drawing.Point(1067, 144);
+            this.textBoxPageNumber.Location = new System.Drawing.Point(1067, 172);
             this.textBoxPageNumber.Name = "textBoxPageNumber";
             this.textBoxPageNumber.Size = new System.Drawing.Size(60, 23);
             this.textBoxPageNumber.TabIndex = 4;
@@ -79,7 +79,7 @@
             // labelPageNumber
             // 
             this.labelPageNumber.AutoSize = true;
-            this.labelPageNumber.Location = new System.Drawing.Point(998, 147);
+            this.labelPageNumber.Location = new System.Drawing.Point(998, 175);
             this.labelPageNumber.Name = "labelPageNumber";
             this.labelPageNumber.Size = new System.Drawing.Size(63, 15);
             this.labelPageNumber.TabIndex = 5;
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1427, 195);
+            this.ClientSize = new System.Drawing.Size(1427, 224);
             this.Controls.Add(this.labelPageNumber);
             this.Controls.Add(this.textBoxPageNumber);
             this.Controls.Add(this.buttonNext);

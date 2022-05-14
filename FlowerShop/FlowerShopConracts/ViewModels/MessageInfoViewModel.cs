@@ -11,6 +11,7 @@ namespace FlowerShopConracts.ViewModels
     // Сообщения, приходящие на почту
     public class MessageInfoViewModel
     {
+        [Column(title: "Id письма", visible: false)]
         public string MessageId { get; set; }
 
         [Column(title: "Прочитано", width: 75)]
