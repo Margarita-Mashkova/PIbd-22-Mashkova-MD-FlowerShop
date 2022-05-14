@@ -18,13 +18,10 @@ namespace FlowerShopView
     {
         private readonly IMessageInfoLogic _messageInfoLogic;
         int currentPage = 1;
-        int countOnPage = 3;
-        int maxPage;
         public FormMessagesInfo(IMessageInfoLogic messageInfoLogic)
         {
             InitializeComponent();
             _messageInfoLogic = messageInfoLogic;
-            CalcCountPages();
         }
 
         private void FormMessagesInfo_Load(object sender, EventArgs e)
@@ -36,7 +33,10 @@ namespace FlowerShopView
         {
             try
             {
-                var list = _messageInfoLogic.Read(null).Skip(countOnPage * (currentPage - 1)).Take(countOnPage).ToList();
+                var list = _messageInfoLogic.Read(new MessageInfoBindingModel
+                {
+                    PageNumber = currentPage
+                });
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -53,21 +53,7 @@ namespace FlowerShopView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void CalcCountPages()
-        {
-            int messagesCount = _messageInfoLogic.Read(null).Count;
-            while ((countOnPage * (currentPage - 1)) < messagesCount)
-            {
-                if (currentPage > maxPage)
-                {
-                    maxPage = currentPage;
-                }
-                currentPage++;
-            }
-            labelMaxPage.Text = "из " + maxPage.ToString();
-            currentPage = 1;
-        }
-
+        
         private void buttonBack_Click(object sender, EventArgs e)
         {
             if (currentPage > 1)
@@ -79,11 +65,16 @@ namespace FlowerShopView
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (currentPage < maxPage)
+            int stringsCountOnPage = _messageInfoLogic.Read(new MessageInfoBindingModel
+            {
+                PageNumber = currentPage + 1
+            }).Count;
+
+            if (stringsCountOnPage != 0)
             {
                 currentPage++;
-            }
-            LoadData();
+                LoadData();
+            }            
         }
 
         private void textBoxPageNumber_TextChanged(object sender, EventArgs e)
@@ -91,9 +82,14 @@ namespace FlowerShopView
             if (textBoxPageNumber.Text != "")
             {
                 int textBoxNumber = Convert.ToInt32(textBoxPageNumber.Text);
-                if (textBoxNumber < maxPage + 1)
+                int stringsCountOnPage = _messageInfoLogic.Read(new MessageInfoBindingModel
                 {
-                    currentPage = Convert.ToInt32(textBoxPageNumber.Text);
+                    PageNumber = textBoxNumber
+                }).Count;
+
+                if (textBoxNumber > 1 && stringsCountOnPage != 0)
+                {
+                    currentPage = textBoxNumber;
                     LoadData();
                 }
             }

@@ -37,6 +37,7 @@ namespace FlowerShopDatabaseImplement.Implements
             {
                 messages = messages.Skip(stringsOnPage * (model.PageNumber.Value - 1)).Take(stringsOnPage);
             }
+
             return messages.Select(CreateModel).ToList();
         }
         public void Insert(MessageInfoBindingModel model)
