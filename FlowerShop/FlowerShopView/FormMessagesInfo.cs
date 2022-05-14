@@ -19,16 +19,19 @@ namespace FlowerShopView
         private readonly IMessageInfoLogic _messageInfoLogic;
         int currentPage = 1;
         int countOnPage = 3;
+        int maxPage;
         public FormMessagesInfo(IMessageInfoLogic messageInfoLogic)
         {
             InitializeComponent();
             _messageInfoLogic = messageInfoLogic;
+            CalcCountPages();
         }
 
         private void FormMessagesInfo_Load(object sender, EventArgs e)
         {
             LoadData();
         }
+
         private void LoadData()
         {
             try
@@ -50,6 +53,20 @@ namespace FlowerShopView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void CalcCountPages()
+        {
+            int messagesCount = _messageInfoLogic.Read(null).Count;
+            while ((countOnPage * (currentPage - 1)) < messagesCount)
+            {
+                if (currentPage > maxPage)
+                {
+                    maxPage = currentPage;
+                }
+                currentPage++;
+            }
+            labelMaxPage.Text = "из " + maxPage.ToString();
+            currentPage = 1;
+        }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
@@ -62,8 +79,7 @@ namespace FlowerShopView
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            int messagesCount = _messageInfoLogic.Read(null).Count;
-            if ((countOnPage * currentPage) < messagesCount)
+            if (currentPage < maxPage)
             {
                 currentPage++;
             }
@@ -74,8 +90,12 @@ namespace FlowerShopView
         {
             if (textBoxPageNumber.Text != "")
             {
-                currentPage = Convert.ToInt32(textBoxPageNumber.Text);
-                LoadData();
+                int textBoxNumber = Convert.ToInt32(textBoxPageNumber.Text);
+                if (textBoxNumber < maxPage + 1)
+                {
+                    currentPage = Convert.ToInt32(textBoxPageNumber.Text);
+                    LoadData();
+                }
             }
         }
 
@@ -86,11 +106,6 @@ namespace FlowerShopView
                 string id = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 var form = Program.Container.Resolve<FormMessageInfo>();
                 form.MessageId = id;
-                /*_messageInfoLogic.CreateOrUpdate(new MessageInfoBindingModel
-                {
-                    MessageId = id,
-                    IsRead = true
-                });*/
                 form.ShowDialog();
                 LoadData();
             }

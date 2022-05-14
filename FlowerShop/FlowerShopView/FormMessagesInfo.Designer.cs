@@ -33,6 +33,7 @@
             this.buttonNext = new System.Windows.Forms.Button();
             this.textBoxPageNumber = new System.Windows.Forms.TextBox();
             this.labelPageNumber = new System.Windows.Forms.Label();
+            this.labelMaxPage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +70,7 @@
             // 
             // textBoxPageNumber
             // 
-            this.textBoxPageNumber.Location = new System.Drawing.Point(1067, 144);
+            this.textBoxPageNumber.Location = new System.Drawing.Point(1024, 144);
             this.textBoxPageNumber.Name = "textBoxPageNumber";
             this.textBoxPageNumber.Size = new System.Drawing.Size(60, 23);
             this.textBoxPageNumber.TabIndex = 4;
@@ -79,17 +80,27 @@
             // labelPageNumber
             // 
             this.labelPageNumber.AutoSize = true;
-            this.labelPageNumber.Location = new System.Drawing.Point(998, 147);
+            this.labelPageNumber.Location = new System.Drawing.Point(955, 147);
             this.labelPageNumber.Name = "labelPageNumber";
             this.labelPageNumber.Size = new System.Drawing.Size(63, 15);
             this.labelPageNumber.TabIndex = 5;
             this.labelPageNumber.Text = "Страница:";
+            // 
+            // labelMaxPage
+            // 
+            this.labelMaxPage.AutoSize = true;
+            this.labelMaxPage.Location = new System.Drawing.Point(1092, 147);
+            this.labelMaxPage.Name = "labelMaxPage";
+            this.labelMaxPage.Size = new System.Drawing.Size(27, 15);
+            this.labelMaxPage.TabIndex = 6;
+            this.labelMaxPage.Text = "из ?";
             // 
             // FormMessagesInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1427, 195);
+            this.Controls.Add(this.labelMaxPage);
             this.Controls.Add(this.labelPageNumber);
             this.Controls.Add(this.textBoxPageNumber);
             this.Controls.Add(this.buttonNext);
@@ -111,5 +122,6 @@
         private Button buttonNext;
         private TextBox textBoxPageNumber;
         private Label labelPageNumber;
+        private Label labelMaxPage;
     }
 }
