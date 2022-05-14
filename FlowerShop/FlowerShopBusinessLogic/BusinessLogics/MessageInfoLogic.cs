@@ -25,7 +25,6 @@ namespace FlowerShopBusinessLogic.BusinessLogics
             }
             return _messageInfoStorage.GetFilteredList(model);
         }
-        //TODO: update
         public void CreateOrUpdate(MessageInfoBindingModel model)
         {
             if (model.IsRead == false || !string.IsNullOrEmpty(model.Reply))
