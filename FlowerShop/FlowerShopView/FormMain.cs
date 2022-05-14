@@ -165,5 +165,11 @@ namespace FlowerShopView
             _workProcces.DoWork(_implementerLogic, _orderLogic);
             LoadData();
         }
+
+        private void вывестиПисьмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessagesInfo>();
+            form.ShowDialog();
+        }
     }
 }

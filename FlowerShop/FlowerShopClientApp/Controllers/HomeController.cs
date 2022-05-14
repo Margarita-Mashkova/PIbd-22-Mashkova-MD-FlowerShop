@@ -12,7 +12,6 @@ namespace FlowerShopClientApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -138,6 +137,48 @@ namespace FlowerShopClientApp.Controllers
         {
             FlowerViewModel flow = APIClient.GetRequest<FlowerViewModel>($"api/main/getflower?flowerId={flower}");
             return count * flow.Price;
+        }
+
+        [HttpGet]
+        public IActionResult MessageInfo(int pageNumber)
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+
+            List<MessageInfoViewModel> model = new List<MessageInfoViewModel>();
+            if (pageNumber > 0)
+            {
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}&pageNumber={pageNumber}");
+            }
+
+            if (model.Count == 0 && Program.PageNumber != 0)
+            {
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}&pageNumber={Program.PageNumber}");
+            }
+            else
+            {
+                Program.PageNumber = pageNumber;
+            }
+            ViewBag.Id = Program.PageNumber;
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult NextMailsPage()
+        {
+            return Redirect($"~/Home/MessageInfo?pageNumber={Program.PageNumber + 1}");
+        }
+
+        [HttpGet]
+        public IActionResult PrevMailsPage()
+        {
+            if (Program.PageNumber > 1)
+            {
+                return Redirect($"~/Home/MessageInfo?pageNumber={Program.PageNumber - 1}");
+            }
+            return Redirect($"~/Home/MessageInfo?pageNumber={Program.PageNumber}");
         }
     }
 }
