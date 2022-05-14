@@ -22,5 +22,17 @@ namespace FlowerShopConracts.ViewModels
 
         [Column(title: "Компоненты", gridViewAutoSize: GridViewAutoSize.Fill)]
         public Dictionary<int, (string, int)> FlowerComponents { get; set; }
+        public string GetComponents()
+        {
+            string stringComponents = string.Empty;
+            if (FlowerComponents != null)
+            {
+                foreach (var component in FlowerComponents)
+                {
+                    stringComponents += component.Value.Item1 + " = " + component.Value.Item2 + " шт.; ";
+                }
+            }
+            return stringComponents;
+        }
     }
 }

@@ -12,6 +12,7 @@ using FlowerShopConracts.BindingModels;
 using FlowerShopBusinessLogic.MailWorker;
 using System.Configuration;
 using FlowerShopConracts.Attributes;
+using FlowerShopConracts.ViewModels;
 
 namespace FlowerShopView
 {
@@ -120,7 +121,11 @@ namespace FlowerShopView
                 var objs = new List<object>();
                 foreach (var conf in config)
                 {
-                    var value = elem.GetType().GetProperty(conf).GetValue(elem);
+                    var value = elem.GetType().GetProperty(conf).GetValue(elem);                    
+                    if (value is Dictionary<int, (string, int)>)
+                    {
+                        objs.Add(((FlowerViewModel)(object)elem).GetComponents());
+                    }
                     objs.Add(value);
                 }
                 grid.Rows.Add(objs.ToArray());
