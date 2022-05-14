@@ -30,19 +30,7 @@ namespace FlowerShopView
             try
             {
                 var list = _logic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.Rows.Clear();
-                    foreach (var flower in list)
-                    {
-                        string strComponents = string.Empty;
-                        foreach (var component in flower.FlowerComponents)
-                        {
-                            strComponents += component.Value.Item1 + " = " + component.Value.Item2 + " шт.; ";
-                        }
-                        dataGridView.Rows.Add(new object[] { flower.Id, flower.FlowerName, flower.Price, strComponents });
-                    }
-                }
+                Program.ConfigGrid(list, dataGridView);
             }
             catch (Exception ex)
             {

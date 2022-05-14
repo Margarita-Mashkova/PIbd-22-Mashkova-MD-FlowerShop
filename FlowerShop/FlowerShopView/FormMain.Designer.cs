@@ -39,11 +39,12 @@
             this.компонентыПоБукетамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вывестиПисьмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
-            this.вывестиПисьмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьБэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,8 @@
             this.справочникиToolStripMenuItem,
             this.отчётыToolStripMenuItem,
             this.запускРаботToolStripMenuItem,
-            this.вывестиПисьмаToolStripMenuItem});
+            this.вывестиПисьмаToolStripMenuItem,
+            this.создатьБэкапToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1471, 24);
@@ -138,6 +140,13 @@
             this.запускРаботToolStripMenuItem.Text = "Запуск работ";
             this.запускРаботToolStripMenuItem.Click += new System.EventHandler(this.запускРаботToolStripMenuItem_Click);
             // 
+            // вывестиПисьмаToolStripMenuItem
+            // 
+            this.вывестиПисьмаToolStripMenuItem.Name = "вывестиПисьмаToolStripMenuItem";
+            this.вывестиПисьмаToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.вывестиПисьмаToolStripMenuItem.Text = "Письма";
+            this.вывестиПисьмаToolStripMenuItem.Click += new System.EventHandler(this.вывестиПисьмаToolStripMenuItem_Click);
+            // 
             // dataGridView
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
@@ -178,12 +187,12 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
-            // вывестиПисьмаToolStripMenuItem
+            // создатьБэкапToolStripMenuItem
             // 
-            this.вывестиПисьмаToolStripMenuItem.Name = "вывестиПисьмаToolStripMenuItem";
-            this.вывестиПисьмаToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.вывестиПисьмаToolStripMenuItem.Text = "Письма";
-            this.вывестиПисьмаToolStripMenuItem.Click += new System.EventHandler(this.вывестиПисьмаToolStripMenuItem_Click);
+            this.создатьБэкапToolStripMenuItem.Name = "создатьБэкапToolStripMenuItem";
+            this.создатьБэкапToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.создатьБэкапToolStripMenuItem.Text = "Создать бекап";
+            this.создатьБэкапToolStripMenuItem.Click += new System.EventHandler(this.создатьБэкапToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -226,5 +235,6 @@
         private ToolStripMenuItem исполнителиToolStripMenuItem;
         private ToolStripMenuItem запускРаботToolStripMenuItem;
         private ToolStripMenuItem вывестиПисьмаToolStripMenuItem;
+        private ToolStripMenuItem создатьБэкапToolStripMenuItem;
     }
 }
