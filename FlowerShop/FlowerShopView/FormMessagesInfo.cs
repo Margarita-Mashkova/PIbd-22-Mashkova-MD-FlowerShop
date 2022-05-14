@@ -19,10 +19,12 @@ namespace FlowerShopView
         private readonly IMessageInfoLogic _messageInfoLogic;
         int currentPage = 1;
         int countOnPage = 3;
+        int maxPage;
         public FormMessagesInfo(IMessageInfoLogic messageInfoLogic)
         {
             InitializeComponent();
             _messageInfoLogic = messageInfoLogic;
+            CalcCountPages();
         }
 
         private void FormMessagesInfo_Load(object sender, EventArgs e)
@@ -34,11 +36,27 @@ namespace FlowerShopView
             try
             {
                 Program.ConfigGrid(_messageInfoLogic.Read(null).Skip(countOnPage * (currentPage - 1)).Take(countOnPage).ToList(), dataGridView);
+                textBoxPageNumber.Text = currentPage.ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        
+        private void CalcCountPages()
+        {
+            int messagesCount = _messageInfoLogic.Read(null).Count;
+            while ((countOnPage * (currentPage - 1)) < messagesCount)
+            {
+                if (currentPage > maxPage)
+                {
+                    maxPage = currentPage;
+                }
+                currentPage++;
+            }
+            labelMaxPage.Text = "из " + maxPage.ToString();
+            currentPage = 1;
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -51,9 +69,8 @@ namespace FlowerShopView
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
-        {
-            int messagesCount = _messageInfoLogic.Read(null).Count;
-            if ((countOnPage * currentPage) < messagesCount)
+        {            
+            if (currentPage < maxPage)
             {
                 currentPage++;
             }
@@ -61,11 +78,15 @@ namespace FlowerShopView
         }
 
         private void textBoxPageNumber_TextChanged(object sender, EventArgs e)
-        {
+        {            
             if (textBoxPageNumber.Text != "")
             {
-                currentPage = Convert.ToInt32(textBoxPageNumber.Text);
-                LoadData();
+                int textBoxNumber = Convert.ToInt32(textBoxPageNumber.Text);
+                if (textBoxNumber < maxPage + 1)
+                {
+                    currentPage = Convert.ToInt32(textBoxPageNumber.Text);
+                    LoadData();
+                }
             }
         }
 
