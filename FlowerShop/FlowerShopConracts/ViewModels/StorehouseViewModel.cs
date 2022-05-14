@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using FlowerShopConracts.Attributes;
 
 namespace FlowerShopConracts.ViewModels
 {
     public class StorehouseViewModel
     {
+        [Column(title: "Номер", width: 75)]
         public int Id { get; set; }
 
-        [DisplayName("Склад")]
+        [Column(title: "Наименование склада", width: 150)]
         public string StorehouseName { get; set; }
 
-        [DisplayName("ФИО ответственного")]
+        [Column(title: "ФИО ответственного", width: 120)]
         public string ResponsibleFullName { get; set; }
 
-        [DisplayName("Дата создания")]
+        [Column(title: "Дата создания", width: 120)]
         public DateTime DateCreate { get; set; }
+
+        [Column(title: "Компоненты", gridViewAutoSize: GridViewAutoSize.Fill)]
         public Dictionary<int, (string, int)> StorehouseComponents { get; set; }
     }
 }

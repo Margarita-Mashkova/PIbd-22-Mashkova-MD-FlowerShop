@@ -30,6 +30,7 @@ namespace FlowerShopView
             try
             {
                 var list = _logic.Read(null);
+                Program.ConfigGrid(list, dataGridView);
                 if (list != null)
                 {
                     dataGridView.Rows.Clear();

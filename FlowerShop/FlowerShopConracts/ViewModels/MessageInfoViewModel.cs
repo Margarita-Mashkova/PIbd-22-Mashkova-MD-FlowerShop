@@ -13,7 +13,7 @@ namespace FlowerShopConracts.ViewModels
     {
         public string MessageId { get; set; }
 
-        [DisplayName("Статус")]
+        [Column(title: "Прочитано", width: 75)]
         public bool IsRead { get; set; }
 
         [Column(title: "Отправитель", width: 195)]
@@ -28,7 +28,7 @@ namespace FlowerShopConracts.ViewModels
         [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Body { get; set; }
     
-        [DisplayName("Ответ")]
+        [Column(title: "Ответ", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Reply { get; set; }
     }
 }
